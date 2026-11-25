@@ -1,0 +1,107 @@
+/* Ananya tiger mascot — hero greeter, section companions, floating helper */
+.bubble{position:absolute;margin:0;background:#fff;color:var(--navy,#0e2a47);font-family:var(--elms,"DM Sans",sans-serif);font-weight:700;font-size:15px;line-height:1.3;padding:12px 16px;border-radius:18px;box-shadow:0 10px 26px rgba(14,42,71,.16);white-space:nowrap;transform-origin:var(--tail-x,20%) 100%;pointer-events:none;z-index:3}
+.bubble::after{content:"";position:absolute;bottom:-9px;left:var(--tail-x,22%);width:18px;height:18px;background:#fff;transform:rotate(45deg);border-radius:0 0 4px 0;box-shadow:4px 4px 8px rgba(14,42,71,.06)}
+.bubble b{color:var(--orange,#ef6b2e)}
+
+/* ---------- hero greeter (home) ---------- */
+.tiger-hero{position:absolute;z-index:4;bottom:44px;left:calc(100% - min(831px,58vw) - 40px);width:clamp(150px,15vw,224px);border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tiger-hero:focus-visible{outline:2px solid var(--blue,#03428e);outline-offset:6px;border-radius:20px}
+.th-fig{display:block;position:relative;transform-origin:50% 100%}
+.th-fig img{display:block}
+.th-body{width:100%;height:auto}
+.th-paw{position:absolute;left:0;top:14.23%;width:28.84%;height:auto;transform-origin:80.6% 86%}
+.tiger-hero .bubble{bottom:93%;left:30%;--tail-x:18%}
+.tiger-hero::after{content:"";position:absolute;left:12%;right:12%;bottom:-6px;height:16px;border-radius:50%;background:radial-gradient(closest-side,rgba(14,42,71,.22),transparent);z-index:-1}
+
+/* ---------- section companions ---------- */
+.tiger-pal{position:absolute;bottom:-34px;width:clamp(120px,10vw,148px);z-index:3;pointer-events:none}
+.tiger-pal[data-side="right"]{left:calc(100% + 70px)}
+.tiger-pal[data-side="left"]{right:calc(100% + 70px)}
+.tiger-pal img{display:block;width:100%;height:auto;transform-origin:50% 100%}
+.tiger-pal .bubble{bottom:96%;--tail-x:26%;left:-10%}
+.tiger-pal[data-side="left"] .bubble{left:auto;right:-14%;--tail-x:70%}
+.tiger-pal.wide{width:clamp(150px,13vw,196px)}
+.tiger-pal.on-dark .bubble{box-shadow:0 10px 26px rgba(0,0,0,.35)}
+
+.tiger-pal.contact-pal{left:auto;right:-6px;top:-10px;bottom:auto;width:132px}
+.tiger-pal.contact-pal .bubble{left:auto;right:60%;bottom:auto;top:70%;--tail-x:84%}
+
+/* ---------- floating helper ---------- */
+.tiger-help{position:fixed;right:max(22px,env(safe-area-inset-right,0px));bottom:0;z-index:65;width:96px;padding:0;border:0;background:none;cursor:pointer;transform:translateY(110%);transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+.tiger-help img{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 14px rgba(14,42,71,.25));transform-origin:50% 100%}
+.tiger-help.show{transform:translateY(22%)}
+.tiger-help.show:hover,.tiger-help.show:focus-visible{transform:translateY(6%)}
+.tiger-help:focus-visible{outline:none}
+.tiger-help:focus-visible img{filter:drop-shadow(0 0 0 2px #fff) drop-shadow(0 0 6px var(--blue,#03428e))}
+.tiger-help .bubble{right:72%;left:auto;bottom:70%;--tail-x:82%;font-size:14px;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.tiger-help.talk .bubble,.tiger-help:hover .bubble,.tiger-help:focus-visible .bubble{transform:scale(1)}
+.modal-open .tiger-help{transform:translateY(110%)}
+
+/* tiger inside the enquiry pop-up */
+.modal-tiger{display:block;width:92px;height:auto;margin:-6px 0 6px;transform-origin:50% 100%}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .tiger-hero{animation:tgIn 1s cubic-bezier(.3,1.4,.5,1) .7s both}
+  .tiger-hero .th-fig{animation:tgBreathe 3.4s ease-in-out 1.7s infinite}
+  .tiger-hero .th-paw{animation:tgWave 5s ease-in-out 1.6s infinite}
+  .tiger-hero .bubble{animation:tgPop .5s cubic-bezier(.3,1.6,.5,1) 1.5s both}
+  .tiger-hero:hover .th-paw,.tiger-hero.hop .th-paw{animation:tgWaveFast .9s ease-in-out infinite}
+  .tiger-hero.hop .th-fig{animation:tgHop .7s cubic-bezier(.3,1.3,.5,1)}
+  .tiger-hero.hop .bubble{animation:tgPop .45s cubic-bezier(.3,1.6,.5,1) both}
+
+  .js .tiger-pal img{animation:tgBreathe 3.6s ease-in-out infinite}
+  .js .tiger-pal:not(.in) img{transform:translateY(30px) scale(.94)}
+  .js .tiger-pal:not(.in) .bubble{transform:scale(.4)}
+  .tiger-pal.in img{animation:tgHop .9s cubic-bezier(.3,1.4,.5,1) both,tgBreathe 3.6s ease-in-out .9s infinite}
+  .tiger-pal.in .bubble{animation:tgPop .5s cubic-bezier(.3,1.6,.5,1) .55s both}
+
+  .tiger-help.show img{animation:tgBob 3s ease-in-out infinite}
+  .tiger-help.show:hover img{animation:tgWiggle .6s ease-in-out}
+  .modal-tiger{animation:tgPeek .7s cubic-bezier(.3,1.5,.5,1) .15s both}
+}
+@keyframes tgIn{0%{transform:translateY(120px) scale(.7)}70%{transform:translateY(-10px) scale(1.04)}100%{transform:none}}
+@keyframes tgBreathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.015,.985) translateY(1px)}}
+@keyframes tgWave{0%,40%,100%{transform:rotate(0)}6%{transform:rotate(-9deg)}12%{transform:rotate(6deg)}18%{transform:rotate(-8deg)}24%{transform:rotate(5deg)}30%{transform:rotate(-3deg)}}
+@keyframes tgWaveFast{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(6deg)}}
+@keyframes tgHop{0%{transform:translateY(40px) scale(.9,1.08)}40%{transform:translateY(-26px) scale(.96,1.04)}65%{transform:translateY(0) scale(1.06,.94)}100%{transform:none}}
+@keyframes tgPop{0%{transform:scale(0)}100%{transform:scale(1)}}
+@keyframes tgBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+@keyframes tgWiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+@keyframes tgPeek{0%{transform:translateY(30px) rotate(-10deg);opacity:0}100%{transform:none;opacity:1}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1320px){.tiger-pal:not(.contact-pal){display:none}}
+@media (max-width:1180px){.tiger-pal.contact-pal{display:none}}
+@media (max-width:1180px){
+  .tiger-hero{left:max(16px,env(safe-area-inset-left,0px));bottom:16px;width:132px}
+  .tiger-hero .bubble{font-size:13px;padding:9px 12px;left:62%}
+}
+@media (max-width:760px){
+  .tiger-help{width:74px;right:max(12px,env(safe-area-inset-right,0px));bottom:52px}
+  .tiger-help .bubble{font-size:13px}
+  .tiger-hero{width:112px}
+}
+
+/* ---------- home hero: fit the whole section in one screen (desktop) ---------- */
+@media (min-width:1181px){
+  .hero{--hh:calc(100svh - 40px);--arth:calc(var(--hh) - 91px - 3vh);--artw:min(58vw,calc(var(--arth) * .9765),831px);
+    min-height:0;height:var(--hh);min-height:600px;max-height:1000px;display:flex;flex-direction:column}
+  .hero-inner{flex:1;display:flex;align-items:center;padding:0 0 1vh}
+  .hero-copy{max-width:calc(100vw - var(--artw) - 120px)!important}
+  .hero .badge{font-size:clamp(12px,1.7vh,14px)}
+  .hero h1{font-size:clamp(36px,min(4.3vw,7vh),62px);margin-top:clamp(10px,2.2vh,22px)!important}
+  .hero h1 .accent{margin-top:0}
+  .hero .lead{margin-top:clamp(10px,2vh,18px);font-size:clamp(15px,2.1vh,18px);line-height:1.55}
+  .hero .btn-row{margin-top:clamp(14px,2.8vh,24px)}
+  .hero-facts{margin-top:clamp(18px,4.2vh,48px);padding-top:clamp(12px,2.2vh,24px)}
+  .hero-facts li{font-size:clamp(14px,2vh,18px);line-height:1.5}
+  .hero-art{top:auto;bottom:0;width:var(--artw);height:auto}
+  .tiger-hero{left:calc(100% - var(--artw) - 150px);bottom:clamp(14px,3vh,44px);width:clamp(110px,min(15vw,26vh),224px)}
+  .scroll-cue{left:max(var(--gutter),calc((100vw - 1320px) / 2));bottom:clamp(8px,2vh,24px);font-size:15px}
+  .scroll-cue svg{width:clamp(48px,8vh,92px);height:clamp(48px,8vh,92px)}
+}
+@media (min-width:1181px) and (max-height:700px){.scroll-cue{display:none}}
+
+/* full-body companions are taller: give their section room for the speech bubble */
+@media (min-width:1321px){.sec:has(.sec-head .tiger-pal:not(.contact-pal)){padding-top:150px}}
