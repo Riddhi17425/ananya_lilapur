@@ -6,46 +6,46 @@ class PageController extends Controller
 {
     public function home()
     {
-        return view('pages.index');
+        return view('front.pages.index');
     }
 
     public function about()
     {
-        return view('pages.about');
+        return view('front.pages.about');
     }
 
     public function academics()
     {
-        return view('pages.academics');
+        return view('front.pages.academics');
     }
 
     public function beyondAcademics()
     {
-        return view('pages.beyond-academics');
+        return view('front.pages.beyond-academics');
     }
 
     public function campusFacilities()
     {
-        return view('pages.campus-facilities');
+        return view('front.pages.campus-facilities');
     }
 
     public function admissions()
     {
-        return view('pages.admissions');
+        return view('front.pages.admissions');
     }
 
     public function careers()
     {
-        return view('pages.careers');
+        return view('front.pages.careers');
     }
 
     public function contact()
     {
-        return view('pages.contact');
+        return view('front.pages.contact');
     }
 
     public function newsGallery()
     {
-        return view('pages.news-gallery');
+        return view('front.pages.news-gallery');
     }
 }

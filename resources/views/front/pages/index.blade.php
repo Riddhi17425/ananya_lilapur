@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('front.layouts.app')
 
 @section('title', 'Ananya International School, Lilapur')
 @section('description', 'Ananya International School, Lilapur is a CBSE school for Play School to Class 8, where strong academics meet sports, arts and real-world skills. Admissions open for April 2027.')

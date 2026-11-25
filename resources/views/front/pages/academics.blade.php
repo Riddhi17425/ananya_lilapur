@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('front.layouts.app')
 
 @section('title', 'Academics · Ananya International School, Lilapur')
 @section('description', 'CBSE curriculum, QUEST pedagogy and learning from the Foundational Stage to Middle School.')

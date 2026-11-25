@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('front.layouts.app')
 
 @section('title', 'School News & Gallery · Ananya International School, Lilapur')
 @section('description', 'Announcements, events, achievements and photo galleries from campus life.')

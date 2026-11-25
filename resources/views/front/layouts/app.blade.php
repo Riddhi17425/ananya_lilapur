@@ -17,13 +17,13 @@
 </head>
 <body>
 
-@include('partials.svg-sprite')
-@include('partials.header')
+@include('front.partials.svg-sprite')
+@include('front.partials.header')
 
 <main id="main">@yield('content')</main>
 
-@include('partials.footer')
-@include('partials.enquiry-modal')
+@include('front.partials.footer')
+@include('front.partials.enquiry-modal')
 
 <script src="{{ asset('frontend/assets/js/site.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/mascot.js') }}"></script>

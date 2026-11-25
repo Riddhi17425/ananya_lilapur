@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('front.layouts.app')
 
 @section('title', 'Contact Us · Ananya International School, Lilapur')
 @section('description', 'Contact details, location map and a general enquiry form for Ananya International School, Lilapur.')

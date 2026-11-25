@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('front.layouts.app')
 
 @section('title', 'About Us · Ananya International School, Lilapur')
 @section('description', 'Our legacy, vision, mission, values and the people behind Ananya International School, Lilapur.')
