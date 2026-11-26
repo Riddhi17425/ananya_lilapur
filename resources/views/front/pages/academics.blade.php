@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('title', 'Academics · Ananya International School, Lilapur')
-@section('description', 'CBSE curriculum, QUEST pedagogy and learning from the Foundational Stage to Middle School.')
+@section('title', $c->raw('seo_title'))
+@section('description', $c->raw('seo_description'))
 
 @push('page-styles')
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/pages.css') }}">
@@ -11,39 +11,39 @@
 <section class="ph ph-acad" aria-labelledby="acad-title">
   <div class="stage">
     <div class="ph-copy intro">
-      <nav class="crumbs" aria-label="Breadcrumb" style="--d:0"><a href="{{ route('home') }}">Home</a><span>/</span><span aria-current="page">Academics</span></nav>
-      <h1 class="h1x word-pop" id="acad-title" style="--d:1">Learning That Goes <span class="accent">Beyond the Textbook</span></h1>
-      <p class="copy-18" style="--d:2">Our academic programme follows the CBSE framework and brings it to life through the QUEST approach. The result is a classroom where children think, question, create and understand, and where strong results follow naturally.</p>
+      <nav class="crumbs" aria-label="Breadcrumb" style="--d:0"><a href="{{ route('home') }}">{{ $c->text('hero_crumb_home') }}</a><span>/</span><span aria-current="page">{{ $c->text('hero_crumb_current') }}</span></nav>
+      <h1 class="h1x word-pop" id="acad-title" style="--d:1">{{ $c->title('hero_title') }}</h1>
+      <p class="copy-18" style="--d:2">{{ $c->text('hero_text') }}</p>
       <div class="btn-row" style="--d:3">
-        <a class="btn btn-primary" href="#stages">Explore Our Programmes <svg class="arrow"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-outline" href="#quest">How QUEST Works</a>
+        <a class="btn btn-primary" href="#stages">{{ $c->text('hero_button_1') }} <svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-outline" href="#quest">{{ $c->text('hero_button_2') }}</a>
       </div>
     </div>
-    <div class="ph-art intro-art"><img src="{{ asset('frontend/assets/acad-hero.png') }}" alt="Ananya students walking out of the school building" width="765" height="492" fetchpriority="high"></div>
+    <div class="ph-art intro-art"><img src="{{ $c->image('hero_image') }}" alt="{{ $c->text('hero_image_alt') }}" width="765" height="492" fetchpriority="high"></div>
   </div>
 </section>
 
 <section class="sec" id="cbse" aria-labelledby="cbse-title">
-  <img class="deco" src="{{ asset('frontend/assets/acad-blob-left.png') }}" alt="" width="245" height="286" loading="lazy" style="position:absolute;left:0;top:0;width:110px;z-index:0">
+  <img class="deco" src="{{ $c->image('deco_blob_left') }}" alt="" width="245" height="286" loading="lazy" style="position:absolute;left:0;top:0;width:110px;z-index:0">
   <div class="stage msplit">
     <div class="copy rv" data-rv="left">
-      <span class="kicker">Curriculum &amp; CBSE Framework</span>
-      <h2 class="h2" id="cbse-title">A Strong <span class="accent">CBSE Foundation</span></h2>
-      <p class="copy-18">The CBSE framework provides the academic foundation for learning at Ananya. Our approach brings curriculum expectations together with meaningful classroom experiences, helping children understand concepts rather than rely only on memorisation. We aim to develop subject knowledge, language and mathematical proficiency, scientific thinking and the ability to apply learning in different contexts.</p>
-      <h3 class="mini-h">What our curriculum offers</h3>
+      <span class="kicker">{{ $c->text('cbse_kicker') }}</span>
+      <h2 class="h2" id="cbse-title">{{ $c->title('cbse_title') }}</h2>
+      <p class="copy-18">{{ $c->text('cbse_text') }}</p>
+      <h3 class="mini-h">{{ $c->text('cbse_list_title') }}</h3>
       <ul class="ticks">
-        <li>A 5+3+3+4 learning structure, with a play-based Foundational Stage followed by Primary and Middle School</li>
-        <li>Languages: English, Hindi and Gujarati. </li>
-        <li>Core subjects: Mathematics, Science, Social Science and Computer Education</li>
-        <li>Integrated learning through projects, field visits and cross-subject activities</li>
-        <li>Strong emphasis on reading, writing, numeracy and communication</li>
+        <li>{{ $c->text('cbse_item_1') }}</li>
+        <li>{{ $c->text('cbse_item_2') }}</li>
+        <li>{{ $c->text('cbse_item_3') }}</li>
+        <li>{{ $c->text('cbse_item_4') }}</li>
+        <li>{{ $c->text('cbse_item_5') }}</li>
       </ul>
     </div>
     <div class="media rv" data-rv="right">
-      <img src="{{ asset('frontend/assets/academics/cbse-curriculum.webp') }}" alt="Students working on a water cycle science model with Science, Mathematics and Social Science books" width="1120" height="1276" loading="lazy">
+      <img src="{{ $c->image('cbse_image') }}" alt="{{ $c->text('cbse_image_alt') }}" width="1120" height="1276" loading="lazy">
       <aside class="callout-card float-2">
-        <h3>Why CBSE?</h3>
-        <p>CBSE is recognised across India and is a preferred pathway for competitive exams, school transfers and higher education. Families moving between cities can be confident that their child’s learning will continue without a break.</p>
+        <h3>{{ $c->text('cbse_card_title') }}</h3>
+        <p>{{ $c->text('cbse_card_text') }}</p>
       </aside>
     </div>
   </div>
@@ -52,47 +52,47 @@
 <section class="sec bg-navy qp" id="quest" aria-labelledby="quest-title">
   <div class="stage">
     <div class="sec-head rv qp-head">
-      <span class="kicker" style="color:#ffb48a">QUEST Pedagogy</span>
-      <h2 class="h2" id="quest-title">Teaching-Learning <span class="accent">Methodologies</span></h2>
-      <p class="qp-sub">Learning that builds understanding.</p>
-      <p class="copy-18">Academic learning at Ananya is designed to help children build strong foundations, make connections and apply what they know. We combine the structure of the CBSE curriculum with teaching approaches that encourage inquiry, participation and independent thinking. As children progress through the school, they are supported in developing the knowledge, skills and confidence needed for increasingly complex learning.</p>
+      <span class="kicker" style="color:#ffb48a">{{ $c->text('quest_kicker') }}</span>
+      <h2 class="h2" id="quest-title">{{ $c->title('quest_title') }}</h2>
+      <p class="qp-sub">{{ $c->text('quest_sub') }}</p>
+      <p class="copy-18">{{ $c->text('quest_text') }}</p>
     </div>
-    <h3 class="qp-title rv">QUEST: Five stages. <span>One meaningful learning journey.</span></h3>
+    <h3 class="qp-title rv">{{ $c->text('quest_grid_title') }} <span>{{ $c->text('quest_grid_title_accent') }}</span></h3>
     <div class="qp-grid" data-stagger>
         <article class="qp-card tilt-hover">
-          <span class="qp-letter" aria-hidden="true">Q</span>
-          <h3>Question</h3>
-          <p class="qp-tag">Curiosity sparks learning.</p>
-          <p class="qp-body">Every meaningful discovery begins with a question. Children meet stories, situations and real-life experiences that invite them to think, predict and connect new concepts with their own experiences.</p>
-          <p class="qp-method">Story-based learning · Inquiry-based learning</p>
+          <span class="qp-letter" aria-hidden="true">{{ $c->text('quest_card_1_letter') }}</span>
+          <h3>{{ $c->text('quest_card_1_title') }}</h3>
+          <p class="qp-tag">{{ $c->text('quest_card_1_tag') }}</p>
+          <p class="qp-body">{{ $c->text('quest_card_1_text') }}</p>
+          <p class="qp-method">{{ $c->text('quest_card_1_method') }}</p>
         </article>
         <article class="qp-card tilt-hover">
-          <span class="qp-letter" aria-hidden="true">U</span>
-          <h3>Understand</h3>
-          <p class="qp-tag">Build meaning, not just memory.</p>
-          <p class="qp-body">Children make sense of new ideas by connecting them with prior knowledge, discussing possibilities and identifying patterns, so they understand the “why” behind the “what”.</p>
-          <p class="qp-method">Visual learning · Concrete-to-abstract learning</p>
+          <span class="qp-letter" aria-hidden="true">{{ $c->text('quest_card_2_letter') }}</span>
+          <h3>{{ $c->text('quest_card_2_title') }}</h3>
+          <p class="qp-tag">{{ $c->text('quest_card_2_tag') }}</p>
+          <p class="qp-body">{{ $c->text('quest_card_2_text') }}</p>
+          <p class="qp-method">{{ $c->text('quest_card_2_method') }}</p>
         </article>
         <article class="qp-card tilt-hover">
-          <span class="qp-letter" aria-hidden="true">E</span>
-          <h3>Explore</h3>
-          <p class="qp-tag">Discover through experience.</p>
-          <p class="qp-body">Children investigate, experiment, create, observe and try different approaches to deepen their understanding.</p>
-          <p class="qp-method">Experiential learning · Learning by doing</p>
+          <span class="qp-letter" aria-hidden="true">{{ $c->text('quest_card_3_letter') }}</span>
+          <h3>{{ $c->text('quest_card_3_title') }}</h3>
+          <p class="qp-tag">{{ $c->text('quest_card_3_tag') }}</p>
+          <p class="qp-body">{{ $c->text('quest_card_3_text') }}</p>
+          <p class="qp-method">{{ $c->text('quest_card_3_method') }}</p>
         </article>
         <article class="qp-card tilt-hover">
-          <span class="qp-letter" aria-hidden="true">S</span>
-          <h3>Share</h3>
-          <p class="qp-tag">Express and reflect.</p>
-          <p class="qp-body">Children explain their thinking, listen to others and learn through discussion and collaboration. Sharing builds empathy, vocabulary and confidence in their own voice.</p>
-          <p class="qp-method">Discussion · Collaboration</p>
+          <span class="qp-letter" aria-hidden="true">{{ $c->text('quest_card_4_letter') }}</span>
+          <h3>{{ $c->text('quest_card_4_title') }}</h3>
+          <p class="qp-tag">{{ $c->text('quest_card_4_tag') }}</p>
+          <p class="qp-body">{{ $c->text('quest_card_4_text') }}</p>
+          <p class="qp-method">{{ $c->text('quest_card_4_method') }}</p>
         </article>
         <article class="qp-card tilt-hover">
-          <span class="qp-letter" aria-hidden="true">T</span>
-          <h3>Transform</h3>
-          <p class="qp-tag">Apply knowledge to the real world.</p>
-          <p class="qp-body">Learning moves beyond the lesson as children apply what they have understood, reflect on their progress and use their knowledge in new situations.</p>
-          <p class="qp-method">Project-based learning · Problem-based learning</p>
+          <span class="qp-letter" aria-hidden="true">{{ $c->text('quest_card_5_letter') }}</span>
+          <h3>{{ $c->text('quest_card_5_title') }}</h3>
+          <p class="qp-tag">{{ $c->text('quest_card_5_tag') }}</p>
+          <p class="qp-body">{{ $c->text('quest_card_5_text') }}</p>
+          <p class="qp-method">{{ $c->text('quest_card_5_method') }}</p>
         </article>
     </div>
   </div>
@@ -101,12 +101,12 @@
 
 @if ($stages->isNotEmpty())
 <section class="sec stage-tabs" id="stages" data-tabs aria-labelledby="stages-title">
-  <img class="deco wiggle" src="{{ asset('frontend/assets/acad-star.png') }}" alt="" width="132" height="122" loading="lazy" style="position:absolute;left:5%;top:120px;width:100px">
-  <img class="deco float" src="{{ asset('frontend/assets/acad-sun.png') }}" alt="" width="150" height="128" loading="lazy" style="position:absolute;right:6%;top:60px;width:130px">
+  <img class="deco wiggle" src="{{ $c->image('deco_star') }}" alt="" width="132" height="122" loading="lazy" style="position:absolute;left:5%;top:120px;width:100px">
+  <img class="deco float" src="{{ $c->image('deco_sun') }}" alt="" width="150" height="128" loading="lazy" style="position:absolute;right:6%;top:60px;width:130px">
   <div class="stage">
     <div class="g-head rv">
-      <h2 class="h2" id="stages-title">Where the joy of <span class="accent br">learning begins.</span></h2>
-      <p class="copy-18">The early years shape how children experience the world, build relationships and approach learning.</p>
+      <h2 class="h2" id="stages-title">{{ $c->title('stages_title') }}</h2>
+      <p class="copy-18">{{ $c->text('stages_text') }}</p>
       <div class="tabs" role="tablist" aria-label="School stages">
         @foreach ($stages as $stage)
         <button role="tab" id="tab-{{ $stage->slug() }}" aria-controls="panel-{{ $stage->slug() }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}" @if (! $loop->first) tabindex="-1" @endif>{{ $stage->tab_name }}</button>
@@ -140,44 +140,44 @@
 <section class="sec bg-sky as" id="assessment" aria-labelledby="assess-title">
   <div class="stage">
     <div class="sec-head rv as-head">
-      <span class="kicker">Assessment &amp; Evaluation</span>
-      <h2 class="h2" id="assess-title">Assessment <span class="accent">@@Ananya</span></h2>
-      <p class="copy-18">Assessment at Ananya is intended to do more than measure performance. It helps teachers understand what children have learnt, where they need support and what the next step should be. Through appropriate assessments, classroom observations, assignments, projects and feedback, we aim to make learning progress visible.</p>
+      <span class="kicker">{{ $c->text('assess_kicker') }}</span>
+      <h2 class="h2" id="assess-title">{{ $c->title('assess_title') }}</h2>
+      <p class="copy-18">{{ $c->text('assess_text') }}</p>
     </div>
     <ol class="as-steps" data-stagger aria-label="How we assess">
         <li class="as-step">
-          <span class="as-num" aria-hidden="true">01</span>
-          <h3>Observe.</h3>
-          <p>How the child participates, explains and approaches a task.</p>
+          <span class="as-num" aria-hidden="true">{{ $c->text('assess_step_1_num') }}</span>
+          <h3>{{ $c->text('assess_step_1_title') }}</h3>
+          <p>{{ $c->text('assess_step_1_text') }}</p>
         </li>
         <li class="as-step">
-          <span class="as-num" aria-hidden="true">02</span>
-          <h3>Look at evidence.</h3>
-          <p>Class work, conversations, activities, projects and demonstrations.</p>
+          <span class="as-num" aria-hidden="true">{{ $c->text('assess_step_2_num') }}</span>
+          <h3>{{ $c->text('assess_step_2_title') }}</h3>
+          <p>{{ $c->text('assess_step_2_text') }}</p>
         </li>
         <li class="as-step">
-          <span class="as-num" aria-hidden="true">03</span>
-          <h3>Give feedback.</h3>
-          <p>Identify what is going well and what the child can try next.</p>
+          <span class="as-num" aria-hidden="true">{{ $c->text('assess_step_3_num') }}</span>
+          <h3>{{ $c->text('assess_step_3_title') }}</h3>
+          <p>{{ $c->text('assess_step_3_text') }}</p>
         </li>
         <li class="as-step">
-          <span class="as-num" aria-hidden="true">04</span>
-          <h3>Plan next steps.</h3>
-          <p>Use what teachers notice to guide further practice or challenge.</p>
+          <span class="as-num" aria-hidden="true">{{ $c->text('assess_step_4_num') }}</span>
+          <h3>{{ $c->text('assess_step_4_title') }}</h3>
+          <p>{{ $c->text('assess_step_4_text') }}</p>
         </li>
     </ol>
-    <p class="as-close rv">Children are encouraged to reflect on their work, recognise areas for improvement and understand that progress comes through effort, practice and guidance.</p>
+    <p class="as-close rv">{{ $c->text('assess_close') }}</p>
   </div>
 </section>
 
 <section class="brighter" aria-labelledby="bright-title">
   <div class="stage" style="height:100%">
     <div class="copy rv" data-rv="left">
-      <h2 class="h2" id="bright-title">Give Your Child a <span class="br">Brighter <span class="accent">Tomorrow.</span></span></h2>
-      <p class="copy-dm">Admissions are open for the academic year starting April 2027. Talk to our team about the right class for your child.</p>
-      <div class="btn-row"><a class="btn btn-apply" href="{{ route('admissions') }}#enquire">Apply for Admission <svg class="arrow"><use href="#i-arrow"/></svg></a><a class="btn btn-outline" href="{{ route('admissions') }}#visit">Book a Campus Visit</a></div>
+      <h2 class="h2" id="bright-title">{{ $c->text('cta_title_before') }} <span class="br">{{ $c->text('cta_title_middle') }} <span class="accent">{{ $c->text('cta_title_accent') }}</span></span></h2>
+      <p class="copy-dm">{{ $c->text('cta_text') }}</p>
+      <div class="btn-row"><a class="btn btn-apply" href="{{ route('admissions') }}#enquire">{{ $c->text('cta_button_1') }} <svg class="arrow"><use href="#i-arrow"/></svg></a><a class="btn btn-outline" href="{{ route('admissions') }}#visit">{{ $c->text('cta_button_2') }}</a></div>
     </div>
-    <img class="art rv" data-rv="right" src="{{ asset('frontend/assets/give-child.png') }}" alt="Parents and their daughter reviewing admission material with an Ananya counsellor" width="817" height="413" loading="lazy">
+    <img class="art rv" data-rv="right" src="{{ $c->image('cta_image') }}" alt="{{ $c->text('cta_image_alt') }}" width="817" height="413" loading="lazy">
   </div>
 </section>
 @endsection

@@ -215,3 +215,16 @@ a.btn{text-align:center}
   .inq-list{grid-template-columns:1fr;gap:2px}
   .inq-list dd{margin-bottom:12px}
 }
+
+/* Pages Content module */
+.pc-intro{margin:-6px 0 18px;max-width:760px;color:var(--muted)}
+.page-head__actions{display:flex;flex-wrap:wrap;gap:10px}
+.pc-section{margin-top:20px}
+.pc-section h2{margin:0 0 18px;padding-bottom:10px;font-size:20px;color:var(--navy);border-bottom:2px solid var(--sky)}
+.pc-section .preview{max-width:260px;max-height:170px;background:var(--cream)}
+.pc-reset-image{margin-top:10px;font-weight:400}
+.pc-actions{position:sticky;bottom:0;margin-top:20px;padding:14px 0;background:var(--cream)}
+.pc-reset{margin:6px 0 30px;text-align:right}
+.pc-reset .link-danger{margin:0}
+.field input[type=text]{width:100%}
+html{scroll-behavior:smooth}

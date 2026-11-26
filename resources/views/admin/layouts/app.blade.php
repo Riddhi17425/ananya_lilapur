@@ -27,6 +27,7 @@
             <a href="{{ route('admin.faqs.index') }}" @class(['is-active' => request()->routeIs('admin.faqs.*')])>FAQs</a>
             <a href="{{ route('admin.learning-stages.index') }}" @class(['is-active' => request()->routeIs('admin.learning-stages.*')])>Learning Stages</a>
             <a href="{{ route('admin.inquiries.index') }}" @class(['is-active' => request()->routeIs('admin.inquiries.*')])>Inquiries</a>
+            <a href="{{ route('admin.page-content.index') }}" @class(['is-active' => request()->routeIs('admin.page-content.*')])>Pages Content</a>
         </nav>
 
         <div class="sidebar__footer">

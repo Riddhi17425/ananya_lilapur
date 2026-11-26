@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('title', 'Careers · Ananya International School, Lilapur')
-@section('description', 'Join the founding team at Ananya International School, Lilapur.')
+@section('title', $c->raw('seo_title'))
+@section('description', $c->raw('seo_description'))
 
 @push('page-styles')
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/pages.css') }}">
@@ -18,58 +18,58 @@
 <section class="ph ph-careers" aria-labelledby="car-title">
   <div class="stage">
     <div class="ph-copy intro">
-      <nav class="crumbs" aria-label="Breadcrumb" style="--d:0"><a href="{{ route('home') }}">Home</a><span>/</span><span aria-current="page">Careers</span></nav>
-      <h1 class="h1x word-pop" id="car-title" style="--d:1">Help Us Build <span class="accent">Something Special</span></h1>
-      <p class="copy-18" style="--d:2">Ananya is a new school with big ambitions, and we are looking for educators and professionals who care about children and want to grow with us. If you want to be part of a school from its very first year, you are in the right place.</p>
+      <nav class="crumbs" aria-label="Breadcrumb" style="--d:0"><a href="{{ route('home') }}">{{ $c->text('hero_crumb_home') }}</a><span>/</span><span aria-current="page">{{ $c->text('hero_crumb_current') }}</span></nav>
+      <h1 class="h1x word-pop" id="car-title" style="--d:1">{{ $c->title('hero_title') }}</h1>
+      <p class="copy-18" style="--d:2">{{ $c->text('hero_text') }}</p>
       <div class="btn-row" style="--d:3">
-        <a class="btn btn-apply" href="#openings">See Current Openings <svg class="arrow"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-outline" href="#apply">Apply Today</a>
+        <a class="btn btn-apply" href="#openings">{{ $c->text('hero_button_1') }} <svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-outline" href="#apply">{{ $c->text('hero_button_2') }}</a>
       </div>
     </div>
-    <div class="ph-art intro-art"><img src="{{ asset('frontend/assets/careers/44.webp') }}" alt="A teacher with young students at a classroom table, with bright windows and shelves behind" width="1249" height="751" fetchpriority="high"></div>
+    <div class="ph-art intro-art"><img src="{{ $c->image('hero_image') }}" alt="{{ $c->attr('hero_image_alt') }}" width="1249" height="751" fetchpriority="high"></div>
   </div>
 </section>
 
 <section class="sec cr cr-intro" aria-labelledby="cr-intro-title">
-  <img class="deco cr-plane" src="{{ asset('frontend/assets/plane-dash-transparent.png') }}" alt="" width="193" height="163" loading="lazy">
+  <img class="deco cr-plane" src="{{ $c->image('deco_plane_image') }}" alt="" width="193" height="163" loading="lazy">
   <div class="stage cr-split">
     <div class="cr-text rv" data-rv="left">
-      <span class="kicker">Careers</span>
-      <h2 class="h2" id="cr-intro-title">Build a future in education. <span class="accent">Make a difference every day.</span></h2>
-      <p class="copy-18">At Ananya, we believe the quality of a child’s learning experience is shaped by the people who guide it. We welcome educators and professionals who bring curiosity, care, commitment and a willingness to grow: people who see education not as the delivery of a syllabus, but as the thoughtful work of helping young minds develop. If you believe in creating meaningful learning experiences and contributing to a school that continues to evolve, we would like to hear from you.</p>
+      <span class="kicker">{{ $c->text('intro_kicker') }}</span>
+      <h2 class="h2" id="cr-intro-title">{{ $c->title('intro_title') }}</h2>
+      <p class="copy-18">{{ $c->text('intro_text') }}</p>
     </div>
     <figure class="cr-photo rv" data-rv="right">
-      <img src="{{ asset('frontend/assets/careers/45.webp') }}" alt="Ananya educators and staff meeting together in the school" width="1249" height="751" loading="lazy">
+      <img src="{{ $c->image('intro_image') }}" alt="{{ $c->attr('intro_image_alt') }}" width="1249" height="751" loading="lazy">
     </figure>
   </div>
 </section>
 
 <section class="sec bg-peach cr" aria-labelledby="cr-work-title">
   <div class="stage msplit">
-    <div class="media rv" data-rv="left"><div class="arch-img" style="border:none;aspect-ratio:auto"><img src="{{ asset('frontend/assets/careers/43.webp') }}" style="transform:none;transition:none;height:auto" alt="Students and a parent building with wooden blocks together during a classroom activity" width="1249" height="799" loading="lazy"></div></div>
+    <div class="media rv" data-rv="left"><div class="arch-img" style="border:none;aspect-ratio:auto"><img src="{{ $c->image('work_image') }}" style="transform:none;transition:none;height:auto" alt="{{ $c->attr('work_image_alt') }}" width="1249" height="799" loading="lazy"></div></div>
     <div class="copy rv" data-rv="right">
-      <span class="kicker">Working at Ananya</span>
-      <h2 class="h2" id="cr-work-title">A shared purpose. <span class="accent">Many ways to make a difference.</span></h2>
-      <p class="copy-18">Working at Ananya means contributing to a learning community where academic growth, relationships, responsibility and new ideas matter. Every role, whether in teaching, leadership or school operations, contributes to the experience we create for children and families.</p>
+      <span class="kicker">{{ $c->text('work_kicker') }}</span>
+      <h2 class="h2" id="cr-work-title">{{ $c->title('work_title') }}</h2>
+      <p class="copy-18">{{ $c->text('work_text') }}</p>
     </div>
   </div>
 </section>
 
 <section class="sec cr" aria-labelledby="cult-title">
   <div class="stage cr-center rv">
-    <span class="kicker">Our Work Culture</span>
-    <h2 class="h2" id="cult-title">A school takes shape through <span class="accent">the people who care for its children.</span></h2>
-    <p class="copy-18">We are looking for thoughtful educators and committed professionals who share our belief in meaningful learning and growing together.</p>
+    <span class="kicker">{{ $c->text('culture_kicker') }}</span>
+    <h2 class="h2" id="cult-title">{{ $c->title('culture_title') }}</h2>
+    <p class="copy-18">{{ $c->text('culture_text') }}</p>
   </div>
 </section>
 
 <section class="sec bg-sky cr" aria-labelledby="cr-grow-title">
   <div class="stage msplit rev">
-    <div class="media rv" data-rv="right"><img class="soft-img" src="{{ asset('frontend/assets/careers/42.webp') }}" alt="Ananya staff members in discussion at a table in a bright room" width="1319" height="959" loading="lazy"></div>
+    <div class="media rv" data-rv="right"><img class="soft-img" src="{{ $c->image('grow_image') }}" alt="{{ $c->attr('grow_image_alt') }}" width="1319" height="959" loading="lazy"></div>
     <div class="copy rv" data-rv="left">
-      <span class="kicker">Professional Growth &amp; Development</span>
-      <h2 class="h2" id="cr-grow-title">Stay curious, <span class="accent">keep learning.</span></h2>
-      <p class="copy-18">At Ananya, educators are encouraged to stay curious, reflect on their practice and keep learning. Our teachers are trained and certified in QUEST pedagogy through capacity building, classroom implementation, observation and feedback, and continuous improvement.</p>
+      <span class="kicker">{{ $c->text('grow_kicker') }}</span>
+      <h2 class="h2" id="cr-grow-title">{{ $c->title('grow_title') }}</h2>
+      <p class="copy-18">{{ $c->text('grow_text') }}</p>
     </div>
   </div>
 </section>
@@ -77,74 +77,74 @@
 <section class="sec cr" id="openings" aria-labelledby="open-title">
   <div class="stage">
     <div class="sec-head cr-head rv">
-      <div class="tiger-pal" data-side="left" aria-hidden="true"><img src="{{ asset('frontend/assets/mascot/tiger-point.webp') }}" alt="" width="500" height="760" loading="lazy"><p class="bubble">We’re <b>hiring</b>!</p></div>
-      <span class="kicker">Current Openings</span>
-      <h2 class="h2" id="open-title">Find your place <span class="accent">at Ananya.</span></h2>
-      <p class="copy-18">Explore current opportunities across teaching, academic leadership, administration and school support. Each opening will list the role, required qualifications, experience and application details.</p>
+      <div class="tiger-pal" data-side="left" aria-hidden="true"><img src="{{ $c->image('deco_tiger_image') }}" alt="" width="500" height="760" loading="lazy"><p class="bubble">{{ $c->text('openings_bubble_before') }} <b>{{ $c->text('openings_bubble_bold') }}</b>{{ $c->text('openings_bubble_after') }}</p></div>
+      <span class="kicker">{{ $c->text('openings_kicker') }}</span>
+      <h2 class="h2" id="open-title">{{ $c->title('openings_title') }}</h2>
+      <p class="copy-18">{{ $c->text('openings_text') }}</p>
     </div>
-    <h3 class="cr-sub rv">Open positions</h3>
+    <h3 class="cr-sub rv">{{ $c->text('openings_subheading') }}</h3>
     <ul class="role-grid" data-stagger>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">01</span>
-            <h4>Administrative Head</h4>
-            <button class="apply-btn" type="button" data-position="Administrative Head">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_1_no') }}</span>
+            <h4>{{ $c->text('role_1_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="Administrative Head">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">02</span>
-            <h4>Administrative Clerk</h4>
-            <button class="apply-btn" type="button" data-position="Administrative Clerk">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_2_no') }}</span>
+            <h4>{{ $c->text('role_2_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="Administrative Clerk">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">03</span>
-            <h4>Pre-primary &amp; Early Years Teachers</h4>
-            <button class="apply-btn" type="button" data-position="Pre-primary & Early Years Teachers">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_3_no') }}</span>
+            <h4>{{ $c->text('role_3_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="Pre-primary & Early Years Teachers">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">04</span>
-            <h4>Middle School Teachers</h4>
-            <button class="apply-btn" type="button" data-position="Middle School Teachers">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_4_no') }}</span>
+            <h4>{{ $c->text('role_4_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="Middle School Teachers">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">05</span>
-            <h4>Language Teachers</h4>
-            <button class="apply-btn" type="button" data-position="Language Teachers">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_5_no') }}</span>
+            <h4>{{ $c->text('role_5_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="Language Teachers">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">06</span>
-            <h4>French Educator</h4>
-            <button class="apply-btn" type="button" data-position="French Educator">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_6_no') }}</span>
+            <h4>{{ $c->text('role_6_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="French Educator">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">07</span>
-            <h4>STEM Educator</h4>
-            <button class="apply-btn" type="button" data-position="STEM Educator">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_7_no') }}</span>
+            <h4>{{ $c->text('role_7_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="STEM Educator">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">08</span>
-            <h4>AI Educator</h4>
-            <button class="apply-btn" type="button" data-position="AI Educator">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_8_no') }}</span>
+            <h4>{{ $c->text('role_8_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="AI Educator">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">09</span>
-            <h4>Career Counsellor</h4>
-            <button class="apply-btn" type="button" data-position="Career Counsellor">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_9_no') }}</span>
+            <h4>{{ $c->text('role_9_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="Career Counsellor">{{ $c->text('role_button') }}</button>
           </li>
           <li class="role-card rv">
-            <span class="role-no" aria-hidden="true">10</span>
-            <h4>IT Executive</h4>
-            <button class="apply-btn" type="button" data-position="IT Executive">Apply Now</button>
+            <span class="role-no" aria-hidden="true">{{ $c->text('role_10_no') }}</span>
+            <h4>{{ $c->text('role_10_title') }}</h4>
+            <button class="apply-btn" type="button" data-position="IT Executive">{{ $c->text('role_button') }}</button>
           </li>
     </ul>
-    <p class="copy-18 rv cr-note">Don’t see a suitable role? Send us your CV at <a href="mailto:admissions@ananyalilapur.org">admissions@ananyalilapur.org</a> and we will keep it on file.</p>
+    <p class="copy-18 rv cr-note">{{ $c->text('openings_note_before') }} <a href="mailto:admissions@ananyalilapur.org">{{ $c->text('openings_note_link') }}</a> {{ $c->text('openings_note_after') }}</p>
   </div>
 </section>
 
 <section class="sec bg-sky cr" id="apply" aria-labelledby="apply-title">
   <div class="stage msplit">
     <div class="copy rv" data-rv="left">
-      <span class="kicker">Apply for a Position</span>
-      <h2 class="h2" id="apply-title">Tell us what you can <span class="accent">bring to Ananya.</span></h2>
-      <p class="copy-18">If you share our commitment to meaningful education and the growth of every child, we invite you to introduce yourself. Please share your résumé and details of the role you are interested in.</p>
+      <span class="kicker">{{ $c->text('apply_kicker') }}</span>
+      <h2 class="h2" id="apply-title">{{ $c->title('apply_title') }}</h2>
+      <p class="copy-18">{{ $c->text('apply_text') }}</p>
     </div>
     <div class="form-panel rv" data-rv="right">
       <form class="js-form" action="{{ route('inquiries.store', 'career') }}" method="POST" enctype="multipart/form-data" data-thanks="Thank you for applying. Our team will review your application and get in touch." novalidate style="margin-top:0">
@@ -156,7 +156,7 @@
           <label class="fl"><span>Years of Experience*</span><input class="field" id="cv-exp" name="experience" required placeholder="e.g. 4 years"></label>
           <label class="fl"><span>Upload Résumé*</span><input class="field" id="cv-file" name="cv" type="file" accept=".pdf,.doc,.docx" required></label>
         </div>
-        <button class="btn btn-apply" type="submit">Submit Application <svg class="arrow"><use href="#i-arrow"/></svg></button>
+        <button class="btn btn-apply" type="submit">{{ $c->text('apply_submit') }} <svg class="arrow"><use href="#i-arrow"/></svg></button>
         <p class="form-note" role="status" aria-live="polite"></p>
       </form>
     </div>

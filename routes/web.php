@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PhotoGalleryController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\InquiryController as AdminInquiryController;
 use App\Http\Controllers\Admin\LearningStageController;
+use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\PageController;
@@ -93,6 +94,12 @@ Route::prefix('admin')->group(function () {
             ->parameters(['learning-stages' => 'stage'])
             ->except('show')
             ->names('admin.learning-stages');
+
+        // Pages content (static text and images of the website pages)
+        Route::get('page-content', [PageContentController::class, 'index'])->name('admin.page-content.index');
+        Route::get('page-content/{page}', [PageContentController::class, 'edit'])->name('admin.page-content.edit');
+        Route::put('page-content/{page}', [PageContentController::class, 'update'])->name('admin.page-content.update');
+        Route::delete('page-content/{page}', [PageContentController::class, 'destroy'])->name('admin.page-content.destroy');
 
         // Inquiries (one tab per form type)
         Route::get('inquiries/resume/{inquiry}', [AdminInquiryController::class, 'resume'])->name('admin.inquiries.resume');
