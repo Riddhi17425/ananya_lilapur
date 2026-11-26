@@ -147,7 +147,7 @@
       <p class="copy-18">If you share our commitment to meaningful education and the growth of every child, we invite you to introduce yourself. Please share your résumé and details of the role you are interested in.</p>
     </div>
     <div class="form-panel rv" data-rv="right">
-      <form class="js-form" data-thanks="Thank you for applying. Our team will review your application and get in touch." novalidate style="margin-top:0">
+      <form class="js-form" action="{{ route('inquiries.store', 'career') }}" method="POST" enctype="multipart/form-data" data-thanks="Thank you for applying. Our team will review your application and get in touch." novalidate style="margin-top:0">
         <div class="f-grid">
           <label class="fl"><span>Full Name*</span><input class="field" id="cv-name" name="name" required autocomplete="name"></label>
           <label class="fl"><span>Email Address*</span><input class="field" id="cv-email" name="email" type="email" required autocomplete="email"></label>

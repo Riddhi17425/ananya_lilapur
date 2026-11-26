@@ -50,7 +50,7 @@
     <div class="msg-panel">
       <div class="form-card" id="enquiry">
         <h2>Send Us a Message</h2>
-        <form class="js-form" data-thanks="Thank you for reaching out. We will get back to you within one working day." novalidate>
+        <form class="js-form" action="{{ route('inquiries.store', 'contact') }}" method="POST" data-thanks="Thank you for reaching out. We will get back to you within one working day." novalidate>
           <label class="sr-only" for="g-name">Name</label><input class="field" id="g-name" name="name" placeholder="Name*" required autocomplete="name">
           <label class="sr-only" for="g-mobile">Mobile</label><input class="field" id="g-mobile" name="mobile" type="tel" placeholder="Mobile*" required autocomplete="tel" pattern="[0-9+\-\s]{10,15}">
           <label class="sr-only" for="g-email">Email</label><input class="field" id="g-email" name="email" type="email" placeholder="Email*" required autocomplete="email">

@@ -9,7 +9,7 @@
     </div>
 
     <div class="panel panel--table">
-        <table class="table">
+        <table class="table" id="testimonials-table" style="width:100%">
             <thead>
                 <tr>
                     <th>#</th>
@@ -21,38 +21,43 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                @forelse ($testimonials as $testimonial)
-                    <tr>
-                        <td>{{ $testimonial->id }}</td>
-                        <td>{{ $testimonial->name }}</td>
-                        <td>{{ $testimonial->reviewer_category ?? '—' }}</td>
-                        <td class="stars" title="{{ $testimonial->star }} / 5">{{ str_repeat('★', $testimonial->star) }}{{ str_repeat('☆', 5 - $testimonial->star) }}</td>
-                        <td>{{ \Illuminate\Support\Str::limit($testimonial->description, 70) }}</td>
-                        <td>
-                            <form method="POST" action="{{ route('admin.testimonials.status', $testimonial) }}">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit" class="badge {{ $testimonial->status ? 'badge--on' : 'badge--off' }}" title="Click to change">
-                                    {{ $testimonial->status ? 'Active' : 'Inactive' }}
-                                </button>
-                            </form>
-                        </td>
-                        <td class="actions">
-                            <a href="{{ route('admin.testimonials.edit', $testimonial) }}">Edit</a>
-                            <form method="POST" action="{{ route('admin.testimonials.destroy', $testimonial) }}" onsubmit="return confirm('Delete this testimonial?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="link-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr><td colspan="7" class="empty">No testimonials yet.</td></tr>
-                @endforelse
-            </tbody>
         </table>
     </div>
-
-    {{ $testimonials->links('admin.partials.pagination') }}
 @endsection
+
+@push('scripts')
+<script>
+$(function () {
+  var table = $('#testimonials-table').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '{{ route('admin.testimonials.index') }}',
+    order: [[1, 'asc']],
+    columns: [
+      { data: 'DT_RowIndex', name: 'id', orderable: false, searchable: false },
+      { data: 'name', name: 'name' },
+      { data: 'reviewer_category', name: 'reviewer_category' },
+      { data: 'star', name: 'star', className: 'stars' },
+      { data: 'description', name: 'description' },
+      { data: 'status', name: 'status', orderable: false, searchable: false },
+      { data: 'action', name: 'action', orderable: false, searchable: false, className: 'actions' }
+    ]
+  });
+
+
+  // Active / inactive switch: save straight away without reloading the table.
+  $('#testimonials-table').on('change', '.js-status-form input', function () {
+    var $input = $(this), $form = $input.closest('form');
+    $input.prop('disabled', true);
+    $.post($form.attr('action'), $form.serialize())
+      .done(function () { $input.closest('.switch').attr('title', $input.prop('checked') ? 'Active' : 'Inactive'); })
+      .fail(function () { $input.prop('checked', !$input.prop('checked')); alert('Could not update the status. Please try again.'); })
+      .always(function () { $input.prop('disabled', false); });
+  });
+  // Ask before deleting (rows are drawn by DataTables, so listen on the table).
+  $('#testimonials-table').on('submit', 'form[data-confirm]', function () {
+    return confirm($(this).data('confirm'));
+  });
+});
+</script>
+@endpush

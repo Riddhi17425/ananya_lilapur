@@ -11,7 +11,7 @@
 
     @include('admin.partials.input', ['name' => 'email', 'label' => 'Email address', 'type' => 'email', 'value' => $email, 'autocomplete' => 'username'])
     @include('admin.partials.input', ['name' => 'password', 'label' => 'New password', 'type' => 'password', 'autocomplete' => 'new-password', 'autofocus' => true, 'attrs' => 'data-rule-minlength="8" data-rule-strongpassword="true"'])
-    @include('admin.partials.input', ['name' => 'password_confirmation', 'label' => 'Confirm new password', 'type' => 'password', 'autocomplete' => 'new-password', 'attrs' => 'data-rule-equalto="#password" data-msg-equalto="Passwords do not match."'])
+    @include('admin.partials.input', ['name' => 'password_confirmation', 'label' => 'Confirm new password', 'type' => 'password', 'autocomplete' => 'new-password', 'attrs' => 'data-rule-equalto="#password"'])
 
     <button type="submit" class="btn">Reset password</button>
 

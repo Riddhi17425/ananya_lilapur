@@ -28,6 +28,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // Inquiries are also added to a Google Sheet (see docs/google-sheet-setup.md). Empty URL = off.
+    'google_sheet' => [
+        'url' => env('GOOGLE_SHEET_URL'),
+        'secret' => env('GOOGLE_SHEET_SECRET'),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

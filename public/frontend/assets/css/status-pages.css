@@ -1,0 +1,82 @@
+/* Thank you, 404 and 500 pages: simple centred card with a little animation. */
+.status-page{position:relative;display:grid;place-items:center;min-height:70vh;padding:60px var(--gutter);overflow:hidden;text-align:center;background:radial-gradient(circle at 20% 20%,var(--sky) 0,transparent 45%),radial-gradient(circle at 85% 80%,#fde7da 0,transparent 40%),var(--cream)}
+.status-page__inner{position:relative;z-index:1;max-width:620px}
+.status-page h1{margin:18px 0 12px;font-family:var(--serif);font-weight:500;font-size:var(--h2);line-height:1.1;color:var(--navy)}
+.status-page h1 .accent{color:var(--orange)}
+.status-page p{margin:0 auto;max-width:520px;font-size:18px;line-height:1.6;color:var(--ink)}
+.status-page__actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px}
+.status-page__actions .btn{text-decoration:none}
+.status-page__tiger{width:150px;margin:0 auto;animation:sp-bounce 2.4s ease-in-out infinite}
+
+/* Animated tick */
+.sp-tick{width:110px;height:110px;margin:0 auto;border-radius:50%;background:#e3f3dd;display:grid;place-items:center;animation:sp-pop .6s cubic-bezier(.2,1.4,.4,1) both,sp-ring 2s ease-out .6s infinite}
+.sp-tick svg{width:56px;height:56px}
+.sp-tick path{fill:none;stroke:#2f7d3a;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;stroke-dashoffset:50;animation:sp-draw .6s ease .5s forwards}
+
+/* Big error number (404 / 500) */
+.sp-code{display:flex;justify-content:center;gap:6px;font-family:var(--serif);font-weight:600;font-size:clamp(90px,18vw,170px);line-height:1;color:var(--blue)}
+.sp-code span{display:inline-block;animation:sp-float 3s ease-in-out infinite}
+.sp-code span:nth-child(2){color:var(--orange);animation-delay:.25s}
+.sp-code span:nth-child(3){animation-delay:.5s}
+
+/* Falling confetti (thank you page) */
+.sp-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sp-confetti i{position:absolute;top:-20px;width:10px;height:16px;border-radius:2px;opacity:0;animation:sp-fall 4.5s linear infinite}
+.sp-confetti i:nth-child(4n+1){background:var(--orange)}
+.sp-confetti i:nth-child(4n+2){background:var(--blue)}
+.sp-confetti i:nth-child(4n+3){background:#f4c542}
+.sp-confetti i:nth-child(4n){background:#37acfe}
+.sp-confetti i:nth-child(1){left:6%;animation-delay:0s}
+.sp-confetti i:nth-child(2){left:14%;animation-delay:1.2s}
+.sp-confetti i:nth-child(3){left:22%;animation-delay:.5s}
+.sp-confetti i:nth-child(4){left:30%;animation-delay:2.4s}
+.sp-confetti i:nth-child(5){left:38%;animation-delay:.9s}
+.sp-confetti i:nth-child(6){left:46%;animation-delay:3.1s}
+.sp-confetti i:nth-child(7){left:54%;animation-delay:.2s}
+.sp-confetti i:nth-child(8){left:62%;animation-delay:1.8s}
+.sp-confetti i:nth-child(9){left:70%;animation-delay:2.9s}
+.sp-confetti i:nth-child(10){left:78%;animation-delay:.7s}
+.sp-confetti i:nth-child(11){left:86%;animation-delay:2s}
+.sp-confetti i:nth-child(12){left:94%;animation-delay:1.4s}
+
+/* Fade-in for the text blocks */
+.sp-rise{opacity:0;animation:sp-rise .7s ease forwards}
+.sp-rise.d1{animation-delay:.7s}
+.sp-rise.d2{animation-delay:.9s}
+.sp-rise.d3{animation-delay:1.1s}
+
+@keyframes sp-pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes sp-draw{to{stroke-dashoffset:0}}
+@keyframes sp-ring{0%{box-shadow:0 0 0 0 rgba(47,125,58,.35)}100%{box-shadow:0 0 0 28px rgba(47,125,58,0)}}
+@keyframes sp-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes sp-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes sp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes sp-fall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:1;transform:translateY(80vh) rotate(540deg)}}
+
+@media (prefers-reduced-motion:reduce){
+  .status-page *,.status-page *::before{animation:none!important}
+  .sp-rise{opacity:1}
+  .sp-tick path{stroke-dashoffset:0}
+  .sp-confetti{display:none}
+}
+
+/* 404 / 500: everything on one screen, text on the left and the tiger on the right (no scrolling) */
+.status-page--error{height:100vh;min-height:0;padding:24px var(--gutter)}
+.status-page__inner--split{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(24px,5vw,70px);max-width:1040px;text-align:left}
+.status-page__inner--split .sp-text img[width="170"]{margin:0 0 16px}
+.status-page__inner--split .sp-code{justify-content:flex-start;font-size:clamp(70px,12vw,130px)}
+.status-page__inner--split h1{margin:10px 0}
+.status-page__inner--split p{margin:0;max-width:480px}
+.status-page__inner--split .status-page__actions{justify-content:flex-start;margin-top:22px}
+.status-page__inner--split .status-page__tiger{width:auto;max-width:100%;height:min(60vh,360px);margin:0}
+@media (max-width:760px){
+  .status-page--error{padding:16px var(--gutter)}
+  .status-page__inner--split{grid-template-columns:minmax(0,1fr) 38%;gap:12px}
+  .status-page__inner--split h1{font-size:26px}
+  .status-page__inner--split p{font-size:14px;line-height:1.45}
+  .status-page__inner--split .sp-code{font-size:56px}
+  .status-page__inner--split .sp-text img[width="170"]{width:120px;height:auto;margin-bottom:8px}
+  .status-page__inner--split .status-page__actions{gap:8px;margin-top:14px}
+  .status-page__inner--split .status-page__actions .btn{padding:9px 16px;font-size:14px}
+  .status-page__inner--split .status-page__tiger{height:auto;width:100%}
+}

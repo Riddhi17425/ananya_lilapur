@@ -121,22 +121,18 @@
   </div>
 </section>
 
+@if ($faqs->isNotEmpty())
 <section class="sec faq" id="faq" aria-labelledby="faq-title">
   <div class="stage">
     <h2 class="h2 rv" id="faq-title">Frequently Asked <span class="accent">Questions</span></h2>
     <div class="faq-list" data-stagger>
-      <details open><summary>Which board does Ananya follow? <i aria-hidden="true"></i></summary><p class="ans">Ananya follows the CBSE curriculum. The affiliation process takes time, and the affiliation number will be shared once it is officially allotted.</p></details>
-      <details><summary>What is the class size? <i aria-hidden="true"></i></summary><p class="ans">Each class has 35 students, in a classroom of approximately 650 sq. ft.</p></details>
-      <details><summary>Is there an entrance test? <i aria-hidden="true"></i></summary><p class="ans">For Play School to Class 2, we hold a friendly interaction with no written test. For higher classes, a simple assessment helps us place the child in the right class.</p></details>
-      <details><summary>Do you provide school transport? <i aria-hidden="true"></i></summary><p class="ans">Yes, we run school buses on planned routes. Please see the <a href="{{ route('campus-facilities') }}#transport">Transport section</a> for details and the enrolment form.</p></details>
-      <details><summary>Is there a cafeteria? <i aria-hidden="true"></i></summary><p class="ans">Yes, we offer a hygienic cafeteria.</p></details>
-      <details><summary>What are the school timings? <i aria-hidden="true"></i></summary><p class="ans">Please contact our admissions desk for the timings for each stage.</p></details>
-      <details><summary>How can I stay in touch with my child’s progress? <i aria-hidden="true"></i></summary><p class="ans">Through monthly parent club interactions, progress reports and our parent portal. You can also approach the school whenever you have a query.</p></details>
-      <details><summary>Can I visit the campus before applying? <i aria-hidden="true"></i></summary><p class="ans">Of course. Please <a href="#visit">book a campus visit</a> and we will show you around.</p></details>
-      <details><summary>Which sports and activities are available? <i aria-hidden="true"></i></summary><p class="ans">Please see the <a href="{{ route('beyond-academics') }}">Beyond Academics page</a> for the full list.</p></details>
+      @foreach ($faqs as $faq)
+      <details @if ($loop->first) open @endif><summary>{{ $faq->question }} <i aria-hidden="true"></i></summary><div class="ans">{!! $faq->answer !!}</div></details>
+      @endforeach
     </div>
   </div>
 </section>
+@endif
 
 <section class="sec paper" aria-label="Enquiry and campus visit forms">
   <div class="stage forms-2">
@@ -144,7 +140,8 @@
       <span class="kicker">Enquire Now</span>
       <h3>Let Us Help You Take the Next Step</h3>
       <p>Tell us about your child and our admissions team will call you within one working day.</p>
-      <form class="js-form" data-thanks="Thank you. Our admissions team will call you within one working day." novalidate>
+      <form class="js-form" action="{{ route('inquiries.store', 'enquire') }}" method="POST" data-thanks="Thank you. Our admissions team will call you within one working day." novalidate>
+        <input type="hidden" name="source" value="admissions">
         <div class="f-grid">
           <label class="fl"><span>Parent’s Name*</span><input class="field" id="e-parent" name="parent" required autocomplete="name"></label>
           <label class="fl"><span>Mobile Number*</span><input class="field" id="e-mobile" name="mobile" type="tel" required autocomplete="tel" pattern="[0-9+\-\s]{10,15}"></label>
@@ -162,7 +159,7 @@
       <span class="kicker">Book a Campus Visit</span>
       <h3>Come and See Ananya for Yourself</h3>
       <p>A visit lets you walk through classrooms, meet our team and see how your child will learn and play. Visits take about 45 minutes. Mon to Sat, 8:00 am to 4:00 pm</p>
-      <form class="js-form" data-thanks="Thank you. We will confirm your campus visit shortly." novalidate>
+      <form class="js-form" action="{{ route('inquiries.store', 'visit') }}" method="POST" data-thanks="Thank you. We will confirm your campus visit shortly." novalidate>
         <div class="f-grid">
           <label class="fl"><span>Parent’s Name*</span><input class="field" id="v-parent" name="parent" required autocomplete="name"></label>
           <label class="fl"><span>Mobile Number*</span><input class="field" id="v-mobile" name="mobile" type="tel" required autocomplete="tel" pattern="[0-9+\-\s]{10,15}"></label>

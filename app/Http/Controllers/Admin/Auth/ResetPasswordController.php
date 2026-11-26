@@ -27,6 +27,9 @@ class ResetPasswordController extends Controller
             'token' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['required', 'confirmed', Rules\Password::min(8)->letters()->mixedCase()->numbers()],
+        ], [], [
+            'email' => 'email address',
+            'password' => 'new password',
         ]);
 
         $status = Password::reset(

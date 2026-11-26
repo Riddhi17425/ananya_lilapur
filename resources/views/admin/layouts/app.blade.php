@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>@yield('title') · Admin · Ananya International School, Lilapur</title>
+<link rel="stylesheet" href="{{ asset('backend/css/vendor/dataTables-2.1.8.min.css') }}">
+<link rel="stylesheet" href="{{ asset('backend/css/vendor/summernote-lite-0.9.0.min.css') }}">
 <link rel="stylesheet" href="{{ asset('backend/css/admin.css') }}">
+@stack('styles')
 </head>
 <body class="admin-page">
 
@@ -19,6 +22,11 @@
         <nav class="sidebar__nav" aria-label="Admin navigation">
             <a href="{{ route('admin.dashboard') }}" @class(['is-active' => request()->routeIs('admin.dashboard')])>Dashboard</a>
             <a href="{{ route('admin.testimonials.index') }}" @class(['is-active' => request()->routeIs('admin.testimonials.*')])>Testimonials</a>
+            <a href="{{ route('admin.photo-gallery-categories.index') }}" @class(['is-active' => request()->routeIs('admin.photo-gallery-categories.*')])>Gallery Categories</a>
+            <a href="{{ route('admin.photo-galleries.index') }}" @class(['is-active' => request()->routeIs('admin.photo-galleries.*')])>Photo Gallery</a>
+            <a href="{{ route('admin.faqs.index') }}" @class(['is-active' => request()->routeIs('admin.faqs.*')])>FAQs</a>
+            <a href="{{ route('admin.learning-stages.index') }}" @class(['is-active' => request()->routeIs('admin.learning-stages.*')])>Learning Stages</a>
+            <a href="{{ route('admin.inquiries.index') }}" @class(['is-active' => request()->routeIs('admin.inquiries.*')])>Inquiries</a>
         </nav>
 
         <div class="sidebar__footer">
@@ -46,6 +54,7 @@
 </div>
 
 @include('admin.partials.scripts')
+@stack('scripts')
 <script src="{{ asset('backend/js/admin.js') }}"></script>
 </body>
 </html>

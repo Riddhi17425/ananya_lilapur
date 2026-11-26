@@ -141,24 +141,18 @@
       <div class="side"><p class="lead">Latest news, events and photo galleries from our campus.</p><div class="btn-row"><a class="btn btn-outline" href="{{ route('news-gallery') }}">View News &amp; Gallery <svg class="arrow"><use href="#i-arrow"/></svg></a></div></div>
     </div>
   </div>
+  @if ($homeGalleries->isNotEmpty())
   <div class="marquee rv" style="margin-top:36px">
     <div class="marquee-track">
-      <figure><img src="{{ asset('frontend/assets/home-break-conversations.webp') }}" alt="Students talking together during a school break" width="596" height="400" loading="lazy"><figcaption>A Break Full of Conversations</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-happy-start.webp') }}" alt="Students arriving at school with a teacher" width="596" height="400" loading="lazy"><figcaption>A Happy Start to Every Day</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-every-creation.webp') }}" alt="Students working together on a creative project" width="596" height="400" loading="lazy"><figcaption>Every Creation Has a Story</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-every-move.webp') }}" alt="Students thinking through a strategy together" width="596" height="400" loading="lazy"><figcaption>Every Move Is a New Strategy</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-finding-rhythm.webp') }}" alt="Students sharing a joyful group activity" width="596" height="400" loading="lazy"><figcaption>Finding Rhythm, Finding Joy</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-helping-hands.webp') }}" alt="Students helping one another during a classroom activity" width="596" height="400" loading="lazy"><figcaption>Helping Hands, Caring Hearts</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-little-discoveries.webp') }}" alt="Students exploring an activity with their teacher" width="596" height="400" loading="lazy"><figcaption>Little Discoveries, Shared Achievements</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-little-voices.webp') }}" alt="Students speaking together at a school event" width="596" height="400" loading="lazy"><figcaption>Little Voices, Big Confidence</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-nature-classroom.webp') }}" alt="Students learning together outdoors on campus" width="596" height="400" loading="lazy"><figcaption>Nature Is Our Classroom Too</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-numbers-through-play.webp') }}" alt="Students using learning materials to explore numbers" width="596" height="400" loading="lazy"><figcaption>Numbers Come Alive Through Play</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-stories-imagination.webp') }}" alt="Students reading a story together" width="596" height="400" loading="lazy"><figcaption>Stories That Spark Imagination</figcaption></figure>
-      <figure><img src="{{ asset('frontend/assets/home-team-spirit.webp') }}" alt="Students passing a football during a game" width="596" height="400" loading="lazy"><figcaption>Team Spirit in Every Pass</figcaption></figure>
+@foreach ($homeGalleries as $gallery)
+      <figure><img src="{{ $gallery->listImageUrl() }}" alt="{{ $gallery->name }}" width="596" height="400" loading="lazy"><figcaption>{{ $gallery->name }}</figcaption></figure>
+@endforeach
     </div>
   </div>
+  @endif
 </section>
 
+@if ($testimonials->isNotEmpty())
 <!-- PARENT TESTIMONIALS -->
 <section class="sec paper" id="testimonials" aria-labelledby="testi-title">
   <div class="container">
@@ -169,31 +163,13 @@
     </div>
     <div class="testi-slider rv">
     <div class="testi-track" id="testi-track" tabindex="0" aria-label="Parent reviews">
-      <figure class="testi testi-1">
-        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div>
-        <blockquote>Our daughter now comes home with questions about everything, and her teachers actually welcome them. She is curious, confident and genuinely happy to go to school.</blockquote>
-        <figcaption class="who"><span><strong>Priya Sharma</strong><span>Grade 2 parent</span></span></figcaption>
+      @foreach ($testimonials as $testimonial)
+      <figure class="testi testi-{{ ($loop->index % 5) + 1 }}">
+        <div class="stars" role="img" aria-label="{{ $testimonial->star }} out of 5 stars">@for ($i = 0; $i < $testimonial->star; $i++)<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg>@endfor</div>
+        <blockquote>{!! $testimonial->description !!}</blockquote>
+        <figcaption class="who"><span><strong>{{ $testimonial->name }}</strong>@if ($testimonial->reviewer_category)<span>{{ $testimonial->reviewer_category }}</span>@endif</span></figcaption>
       </figure>
-      <figure class="testi testi-2">
-        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div>
-        <blockquote>The early-years team knew our son by name within a week. He settled in so gently, and we always feel like partners in his learning, not just visitors.</blockquote>
-        <figcaption class="who"><span><strong>Rahul Mehta</strong><span>Nursery parent</span></span></figcaption>
-      </figure>
-      <figure class="testi testi-3">
-        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div>
-        <blockquote>What I love is that learning connects to real life. My son explains science ideas using things he has seen and done, not lines he has memorised.</blockquote>
-        <figcaption class="who"><span><strong>Sneha Patel</strong><span>Grade 5 parent</span></span></figcaption>
-      </figure>
-      <figure class="testi testi-4">
-        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div>
-        <blockquote>Beyond academics, Ananya cares about who the children are becoming: kind, respectful and responsible. Sports, art and music are valued as much as the classroom.</blockquote>
-        <figcaption class="who"><span><strong>Meera Joshi</strong><span>Grade 3 parent</span></span></figcaption>
-      </figure>
-      <figure class="testi testi-5">
-        <div class="stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div>
-        <blockquote>Communication is open and warm, the campus feels safe and cheerful, and both our children feel they matter. We could not have asked for a better school.</blockquote>
-        <figcaption class="who"><span><strong>Amit &amp; Kavita Desai</strong><span>Parent of two students</span></span></figcaption>
-      </figure>
+      @endforeach
     </div>
     <div class="testi-ctrl">
       <button class="testi-btn" type="button" id="testi-prev" aria-label="Previous review"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -223,6 +199,7 @@
   window.addEventListener('resize',build);build();
 })();
 </script>
+@endif
 
 <!-- ADMISSIONS STEPS PREVIEW -->
 <section class="sec bg-peach" aria-labelledby="steps-title">
@@ -256,7 +233,8 @@
     </div>
     <div class="form-card rv" data-rv="right" id="enquiry-form">
       <h2>Request a Call Back</h2>
-      <form class="js-form" data-thanks="Thank you. Our admissions team will reach out to you shortly." novalidate>
+      <form class="js-form" action="{{ route('inquiries.store', 'enquire') }}" method="POST" data-thanks="Thank you. Our admissions team will reach out to you shortly." novalidate>
+        <input type="hidden" name="source" value="home">
         <label class="sr-only" for="h-parent">Parent's name</label><input class="field" id="h-parent" name="parent" placeholder="Parent’s Name*" required autocomplete="name">
         <label class="sr-only" for="h-mobile">Mobile number</label><input class="field" id="h-mobile" name="mobile" type="tel" placeholder="Mobile Number*" required autocomplete="tel" pattern="[0-9+\-\s]{10,15}">
         <label class="sr-only" for="h-email">Email</label><input class="field" id="h-email" name="email" type="email" placeholder="Email*" required autocomplete="email">
@@ -264,7 +242,7 @@
         <label class="sr-only" for="h-class">Class applying for</label>
         <select class="field" id="h-class" name="class" required><option value="" disabled selected hidden>Class Applying For*</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option></select>
         <label class="sr-only" for="h-date">Preferred campus visit date</label><input class="field" id="h-date" name="visit_date" type="text" placeholder="Preferred Campus Visit Date (optional)" onfocus="this.type='date'">
-        <label class="consent"><input type="checkbox" id="h-consent" required> I agree to be contacted by Ananya International School, Lilapur.</label>
+        <label class="consent"><input type="checkbox" id="h-consent" name="consent" required> I agree to be contacted by Ananya International School, Lilapur.</label>
         <button class="btn btn-apply" type="submit">Request a Call Back <svg class="arrow"><use href="#i-arrow"/></svg></button>
         <p class="form-note" role="status" aria-live="polite"></p>
       </form>

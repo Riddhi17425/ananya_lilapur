@@ -5,7 +5,7 @@
 @php($type = $type ?? 'text')
 
 <div class="field">
-    <label for="{{ $name }}">{{ $label }}</label>
+    <label for="{{ $name }}" class="is-required">{{ $label }}</label>
 
     <div class="field__wrap">
         <input

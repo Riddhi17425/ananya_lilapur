@@ -33,7 +33,17 @@ class TestimonialTest extends TestCase
         $this->actingAs(User::factory()->create());
         $testimonial = Testimonial::create($this->data());
 
-        $this->get(route('admin.testimonials.index'))->assertOk()->assertSee('Asha Patel');
+        $this->get(route('admin.testimonials.index'))->assertOk()->assertSee('testimonials-table');
+
+        // DataTables loads the rows with an ajax request.
+        $this->getJson(route('admin.testimonials.index', [
+            'draw' => 1, 'start' => 0, 'length' => 10,
+            'search' => ['value' => 'Asha'],
+            'columns' => [['data' => 'name', 'name' => 'name', 'searchable' => 'true', 'orderable' => 'true']],
+        ]), ['X-Requested-With' => 'XMLHttpRequest'])
+            ->assertOk()
+            ->assertJsonPath('recordsTotal', 1)
+            ->assertJsonPath('data.0.name', 'Asha Patel');
         $this->get(route('admin.testimonials.create'))->assertOk();
         $this->get(route('admin.testimonials.edit', $testimonial))->assertOk();
     }

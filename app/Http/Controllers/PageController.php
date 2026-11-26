@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
+use App\Models\LearningStage;
+use App\Models\PhotoGallery;
+use App\Models\PhotoGalleryCategory;
+use App\Models\Testimonial;
+
 class PageController extends Controller
 {
     public function home()
     {
-        return view('front.pages.index');
+        return view('front.pages.index', [
+            'testimonials' => Testimonial::active()->oldest('id')->get(),
+            // "Life at Ananya" strip: the 12 newest active photos from the photo gallery.
+            'homeGalleries' => PhotoGallery::active()
+                ->whereIn('category_id', PhotoGalleryCategory::active()->select('id'))
+                ->latest('id')
+                ->limit(12)
+                ->get(),
+        ]);
     }
 
     public function about()
@@ -16,7 +30,9 @@ class PageController extends Controller
 
     public function academics()
     {
-        return view('front.pages.academics');
+        return view('front.pages.academics', [
+            'stages' => LearningStage::active()->ordered()->get(),
+        ]);
     }
 
     public function beyondAcademics()
@@ -31,7 +47,9 @@ class PageController extends Controller
 
     public function admissions()
     {
-        return view('front.pages.admissions');
+        return view('front.pages.admissions', [
+            'faqs' => Faq::active()->oldest('id')->get(),
+        ]);
     }
 
     public function careers()
@@ -46,6 +64,15 @@ class PageController extends Controller
 
     public function newsGallery()
     {
-        return view('front.pages.news-gallery');
+        // "Life on Campus": all active categories (filters) and their active photos.
+        $categories = PhotoGalleryCategory::active()->orderBy('id')->get();
+
+        $galleries = PhotoGallery::active()
+            ->with('category')
+            ->whereIn('category_id', $categories->modelKeys())
+            ->oldest('id')
+            ->get();
+
+        return view('front.pages.news-gallery', compact('categories', 'galleries'));
     }
 }

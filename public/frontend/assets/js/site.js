@@ -50,19 +50,7 @@
   /* marquee: duplicate track for a seamless loop */
   $$('.marquee-track').forEach(function(t){t.innerHTML+=t.innerHTML;[].slice.call(t.children).slice(t.children.length/2).forEach(function(c){c.setAttribute('aria-hidden','true')})});
 
-  /* forms */
-  function thanksHTML(msg){return '<div class="form-done" role="status"><span class="ok"><svg viewBox="0 0 36 36"><path d="M9 18.5l6 6 12-13" fill="none" stroke="#2f7d3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h4>Thank you!</h4><p>'+msg+'</p><button type="button" data-again>Send another</button></div>'}
-  $$('.js-form').forEach(function(f){
-    f.addEventListener('submit',function(e){e.preventDefault();
-      var note=$('.form-note',f),bad=[];
-      $$('[required]',f).forEach(function(x){var ok=x.type==='checkbox'?x.checked:x.checkValidity()&&String(x.value).trim()!=='';x.classList.toggle('is-bad',!ok);if(!ok)bad.push(x)});
-      if(bad.length){if(note){note.style.color='#b23b37';note.textContent=bad.some(function(b){return b.type==='checkbox'})&&bad.length===1?'Please tick the consent box so we can contact you.':'Please fill in the highlighted fields.'}bad[0].focus();return}
-      var wrap=doc.createElement('div');wrap.innerHTML=thanksHTML(f.dataset.thanks||'Thank you. We will get back to you within one working day.');
-      var done=wrap.firstChild;f.hidden=true;f.parentNode.insertBefore(done,f.nextSibling);store('ananya-enquired','1');
-      $('[data-again]',done).addEventListener('click',function(){done.remove();f.reset();f.hidden=false;if(note)note.textContent=''});
-    });
-    f.addEventListener('input',function(e){e.target.classList&&e.target.classList.remove('is-bad')});
-  });
+  /* forms: validation and sending are in forms.js */
 
   /* enquiry modal */
   var modal=$('#enquiry-modal'),lastFocus=null;
@@ -108,7 +96,7 @@
     $$('button',fb).forEach(function(b){b.addEventListener('click',function(){$$('button',fb).forEach(function(x){x.setAttribute('aria-pressed',x===b)});var c=b.dataset.cat;
       items.forEach(function(it){it.classList.toggle('out',c!=='all'&&it.dataset.cat!==c)});var empty=doc.getElementById(fb.dataset.for+'-empty');if(empty)empty.hidden=items.some(function(it){return !it.classList.contains('out')})})})});
   $$('.g-item').forEach(function(it){it.tabIndex=0;it.setAttribute('role','button');
-    function open(){var img=$('img',it);lb=doc.createElement('div');lb.className='lightbox';lb.innerHTML='<button type="button" aria-label="Close">×</button><div><img alt=""><p></p></div>';$('img',lb).src=img.src;$('img',lb).alt=img.alt;$('p',lb).textContent=$('figcaption span',it).textContent;
+    function open(){var img=$('img',it);lb=doc.createElement('div');lb.className='lightbox';lb.innerHTML='<button type="button" aria-label="Close">×</button><div><img alt=""><p></p></div>';$('img',lb).src=it.dataset.full||img.src;$('img',lb).alt=img.alt;$('p',lb).textContent=$('figcaption span',it).textContent;
       lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='BUTTON')closeLb()});doc.body.appendChild(lb);doc.body.classList.add('modal-open');$('button',lb).focus()}
     it.addEventListener('click',open);it.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})});
   /* footer waves take the colour of the section above them */

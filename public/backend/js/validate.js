@@ -3,10 +3,35 @@
 // type="email", data-rule-minlength="8", data-rule-equalto="#password".
 // Laravel still validates again on the server, so this is only for a faster UX.
 $(function () {
+  // Field name used in messages, taken from the field label (without the * mark).
+  function fieldName(element) {
+    var text = $('label[for="' + element.id + '"]').first().text().replace('*', '').trim().toLowerCase();
+    return text || element.name;
+  }
+
+  // Messages in the same style as Laravel, e.g. "The email address field is required."
+  $.extend($.validator.messages, {
+    required: function (params, element) { return 'The ' + fieldName(element) + ' field is required.'; },
+    email: function (params, element) { return 'The ' + fieldName(element) + ' must be a valid email address.'; },
+    maxlength: function (params, element) { return 'The ' + fieldName(element) + ' must not be greater than ' + params + ' characters.'; },
+    minlength: function (params, element) { return 'The ' + fieldName(element) + ' must be at least ' + params + ' characters.'; },
+    equalTo: function (params, element) { return 'The ' + fieldName(element) + ' must match the ' + fieldName($(params)[0]) + '.'; }
+  });
   // At least 1 lowercase, 1 uppercase and 1 number (same as the server rule).
   $.validator.addMethod('strongpassword', function (value, element) {
     return this.optional(element) || (/[a-z]/.test(value) && /[A-Z]/.test(value) && /\d/.test(value));
-  }, 'Use upper and lower case letters and a number.');
+  }, function (params, element) {
+    return 'The ' + fieldName(element) + ' must contain an upper case letter, a lower case letter and a number.';
+  });
+
+  // Image upload: JPG, PNG or WEBP, up to 2 MB (same as the server rule).
+  $.validator.addMethod('imagefile', function (value, element) {
+    if (this.optional(element) || !element.files || !element.files.length) { return true; }
+    var file = element.files[0];
+    return /\.(jpe?g|png|webp)$/i.test(file.name) && file.size <= 2 * 1024 * 1024;
+  }, function (params, element) {
+    return 'The ' + fieldName(element) + ' must be a JPG, PNG or WEBP file up to 2 MB.';
+  });
 
   $('form.js-validate').each(function () {
     $(this).validate({

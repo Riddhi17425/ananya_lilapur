@@ -22,7 +22,7 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
-        ]);
+        ], [], ['email' => 'email address']);
 
         // Block brute-force attempts: 5 tries per minute for each email + IP.
         $throttleKey = Str::lower($credentials['email']).'|'.$request->ip();

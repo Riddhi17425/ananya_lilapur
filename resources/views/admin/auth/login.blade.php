@@ -9,7 +9,7 @@
     @csrf
 
     @include('admin.partials.input', ['name' => 'email', 'label' => 'Email address', 'type' => 'email', 'autocomplete' => 'username', 'placeholder' => 'admin@example.com', 'autofocus' => true])
-    @include('admin.partials.input', ['name' => 'password', 'label' => 'Password', 'type' => 'password', 'autocomplete' => 'current-password', 'placeholder' => 'Enter your password', 'attrs' => 'data-msg-required="Please enter your password."'])
+    @include('admin.partials.input', ['name' => 'password', 'label' => 'Password', 'type' => 'password', 'autocomplete' => 'current-password', 'placeholder' => 'Enter your password'])
 
     <div class="form-row">
         <label class="check">

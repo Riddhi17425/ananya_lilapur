@@ -99,6 +99,7 @@
   <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true" style="bottom:-1px;height:70px"><path d="M0 62c260-30 520-28 760-4s460 26 680-8V90H0Z" fill="#fbf8f1"/></svg>
 </section>
 
+@if ($stages->isNotEmpty())
 <section class="sec stage-tabs" id="stages" data-tabs aria-labelledby="stages-title">
   <img class="deco wiggle" src="{{ asset('frontend/assets/acad-star.png') }}" alt="" width="132" height="122" loading="lazy" style="position:absolute;left:5%;top:120px;width:100px">
   <img class="deco float" src="{{ asset('frontend/assets/acad-sun.png') }}" alt="" width="150" height="128" loading="lazy" style="position:absolute;right:6%;top:60px;width:130px">
@@ -107,50 +108,34 @@
       <h2 class="h2" id="stages-title">Where the joy of <span class="accent br">learning begins.</span></h2>
       <p class="copy-18">The early years shape how children experience the world, build relationships and approach learning.</p>
       <div class="tabs" role="tablist" aria-label="School stages">
-        <button role="tab" id="tab-foundational" aria-controls="panel-foundational" aria-selected="true">Foundational</button>
-        <button role="tab" id="tab-primary" aria-controls="panel-primary" aria-selected="false" tabindex="-1">Primary</button>
-        <button role="tab" id="tab-middle" aria-controls="panel-middle" aria-selected="false" tabindex="-1">Middle</button>
-        <button role="tab" id="tab-secondary" aria-controls="panel-secondary" aria-selected="false" tabindex="-1">Secondary</button>
+        @foreach ($stages as $stage)
+        <button role="tab" id="tab-{{ $stage->slug() }}" aria-controls="panel-{{ $stage->slug() }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}" @if (! $loop->first) tabindex="-1" @endif>{{ $stage->tab_name }}</button>
+        @endforeach
       </div>
     </div>
-    <div class="panel" id="panel-foundational" role="tabpanel" aria-labelledby="tab-foundational">
-      <img src="{{ asset('frontend/assets/academics/stage-foundational.webp') }}" alt="Young learners reading a storybook and playing with ABC blocks in a bright classroom" width="1120" height="1276" loading="lazy" style="max-width:340px;margin:0 auto">
+    @foreach ($stages as $stage)
+    <div class="panel" id="panel-{{ $stage->slug() }}" role="tabpanel" aria-labelledby="tab-{{ $stage->slug() }}" @if (! $loop->first) hidden @endif>
+      <img src="{{ $stage->imageUrl() }}" alt="{{ $stage->image_alt }}" loading="lazy" style="max-width:{{ $stage->image_width }}px;margin:0 auto{{ $stage->image_arch ? ';border-radius:150px 150px 20px 20px' : '' }}">
       <div class="copy">
-        <span class="kicker">Foundational Stage · Play School to Class 2</span>
-        <h3>Where Little Learners Take Their First Steps</h3>
-        <p class="copy-18">At Ananya, the Foundational Stage focuses on language, early numeracy, movement, play, imagination and social-emotional development. Stories, conversations, games, music and hands-on activities help children make sense of the world around them. We give young learners opportunities to explore at their own pace, express themselves and develop the confidence to try something new.</p>
-        <ul class="ticks cols"><li>Play-based and activity-based learning</li><li>Early language, number sense and motor skills</li><li>Storytelling, rhymes, music, movement and art</li><li>Sensory and outdoor play</li><li>Social and emotional learning: sharing, kindness and confidence</li></ul>
-        <ul class="chips" aria-label="Classes"><li>Play School</li><li>Nursery</li><li>Jr. KG</li><li>Sr. KG</li><li>Class 1</li><li>Class 2</li></ul>
+        @if ($stage->badge)<span class="soon-badge">{{ $stage->badge }}</span>@endif
+        <span class="kicker">{{ $stage->kicker }}</span>
+        <h3>{{ $stage->heading }}</h3>
+        <div class="copy-18">{!! $stage->description !!}</div>
+        @if ($stage->pointList())
+        <ul class="ticks cols">@foreach ($stage->pointList() as $point)<li>{{ $point }}</li>@endforeach</ul>
+        @endif
+        @if ($stage->classList())
+        <ul class="chips" aria-label="Classes">@foreach ($stage->classList() as $class)<li>{{ $class }}</li>@endforeach</ul>
+        @endif
+        @if ($stage->notify_button)
+        <button class="btn btn-apply" type="button" data-enquire data-notify-me data-source="notify-{{ $stage->slug() }}" data-title="Notify Me When Available" data-text="Leave your details and we will let you know as soon as Classes 9 to 12 open for admission.">Notify Me When Available <svg class="arrow"><use href="#i-arrow"/></svg></button>
+        @endif
       </div>
     </div>
-    <div class="panel" id="panel-primary" role="tabpanel" aria-labelledby="tab-primary" hidden>
-      <img src="{{ asset('frontend/assets/academics/stage-primary.webp') }}" alt="Students exploring a plant and reading a science book together" width="765" height="492" loading="lazy" style="max-width:340px;margin:0 auto">
-      <div class="copy">
-        <span class="kicker">Primary School (Grades 3 to 5)</span>
-        <h3>From discovering ideas to making connections.</h3>
-        <p class="copy-18">The primary years are a time when curiosity grows into deeper understanding. Children strengthen their reading, writing and mathematical skills while exploring science, the environment, people and the world around them. Through discussions, activities, projects and collaborative tasks, they learn to connect ideas and express their thinking. Alongside academic progress, we encourage independence, responsibility, kindness and a willingness to learn from mistakes.</p>
-      </div>
-    </div>
-    <div class="panel" id="panel-middle" role="tabpanel" aria-labelledby="tab-middle" hidden>
-      <img src="{{ asset('frontend/assets/academics/stage-middle.webp') }}" alt="Middle school students discussing ideas over books and a laptop" width="1120" height="1276" loading="lazy" style="max-width:300px;margin:0 auto">
-      <div class="copy">
-        <span class="kicker">Middle School (Grades 6 to 8)</span>
-        <h3>Thinking deeper. Looking wider.</h3>
-        <p class="copy-18">As children grow, their questions become more complex and their perspectives begin to widen. Middle school learning encourages students to analyse information, consider different viewpoints, investigate problems and work with greater independence. Subject knowledge is strengthened through application, discussion, research and interdisciplinary connections. Students also begin to understand their interests, recognise their strengths and take greater ownership of their learning.</p>
-      </div>
-    </div>
-    <div class="panel" id="panel-secondary" role="tabpanel" aria-labelledby="tab-secondary" hidden>
-      <img src="{{ asset('frontend/assets/academics/stage-secondary.webp') }}" alt="Senior students with Physics, Chemistry and Mathematics books, working with their teacher" width="1120" height="1276" loading="lazy" style="max-width:300px;margin:0 auto;border-radius:150px 150px 20px 20px">
-      <div class="copy">
-        <span class="soon-badge">Coming soon</span>
-        <span class="kicker">Secondary &amp; Senior Secondary School</span>
-        <h3>Preparing for the choices ahead.</h3>
-        <p class="copy-18">Coming soon: programme details and grade availability will be announced soon. The next chapter of the Ananya learning journey is taking shape.</p>
-        <button class="btn btn-apply" type="button" data-enquire data-notify-me data-source="notify-secondary" data-title="Notify Me When Available" data-text="Leave your details and we will let you know as soon as Classes 9 to 12 open for admission.">Notify Me When Available <svg class="arrow"><use href="#i-arrow"/></svg></button>
-      </div>
-    </div>
+    @endforeach
   </div>
 </section>
+@endif
 
 <section class="sec bg-sky as" id="assessment" aria-labelledby="assess-title">
   <div class="stage">

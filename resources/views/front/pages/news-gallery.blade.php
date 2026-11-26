@@ -16,7 +16,7 @@
       <p class="copy-18" style="--d:2">Latest announcements, events, achievements and photo galleries from campus life.</p>
       <div class="btn-row" style="--d:3">
         <a class="btn btn-primary" href="#gallery">Browse the Gallery <svg class="arrow"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-outline" href="#announcements">Announcements</a>
+        <!-- <a class="btn btn-outline" href="#announcements">Announcements</a> -->
       </div>
     </div>
     <div class="collage intro-art" aria-hidden="true">
@@ -30,7 +30,7 @@
   </div>
 </section>
 
-<section class="sec tight" id="announcements" aria-labelledby="ann-title">
+<!-- <section class="sec tight" id="announcements" aria-labelledby="ann-title">
   <div class="stage">
     <div class="sec-head left rv" style="margin-bottom:26px">
       <span class="kicker">Announcements</span>
@@ -42,7 +42,7 @@
       <article class="ann tbc-ann"><span class="ann-tag">Event</span><h3>[Event title]</h3><p>[Date and short summary]</p></article>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="sec bg-sky" id="gallery" aria-labelledby="gal-title">
   <div class="stage">
@@ -53,22 +53,14 @@
     </div>
     <div class="filters rv" data-for="g1" role="group" aria-label="Filter photos">
       <button type="button" data-cat="all" aria-pressed="true">All</button>
-      <button type="button" data-cat="events" aria-pressed="false">Events</button>
-      <button type="button" data-cat="sports" aria-pressed="false">Sports</button>
-      <button type="button" data-cat="arts" aria-pressed="false">Arts</button>
-      <button type="button" data-cat="achievements" aria-pressed="false">Achievements</button>
-      <button type="button" data-cat="announcements" aria-pressed="false">Announcements</button>
+@foreach ($categories as $category)
+      <button type="button" data-cat="{{ Str::slug($category->category_name) }}" aria-pressed="false">{{ $category->category_name }}</button>
+@endforeach
     </div>
     <div class="gallery" id="g1" data-stagger>
-      <figure class="g-item" data-cat="sports"><img src="{{ asset('frontend/assets/cricket-arch.png') }}" alt="A student batting at the cricket nets" loading="lazy"><figcaption><span>Cricket practice</span><b class="tag">Sports</b></figcaption></figure>
-      <figure class="g-item" data-cat="events"><img src="{{ asset('frontend/assets/t-2004.png') }}" alt="Children playing together on the playground" loading="lazy"><figcaption><span>Playtime together</span><b class="tag">Events</b></figcaption></figure>
-      <figure class="g-item" data-cat="arts"><img src="{{ asset('frontend/assets/space-art.png') }}" alt="The art and craft studio" loading="lazy"><figcaption><span>Art studio</span><b class="tag">Arts</b></figcaption></figure>
-      <figure class="g-item" data-cat="events"><img src="{{ asset('frontend/assets/about-hero.png') }}" alt="Students building a terrarium" loading="lazy"><figcaption><span>Hands-on learning</span><b class="tag">Events</b></figcaption></figure>
-      <figure class="g-item" data-cat="sports"><img src="{{ asset('frontend/assets/space-sports.png') }}" alt="The indoor sports hall" loading="lazy"><figcaption><span>Indoor sports hall</span><b class="tag">Sports</b></figcaption></figure>
-      <figure class="g-item" data-cat="arts"><img src="{{ asset('frontend/assets/classroom-girl.png') }}" alt="A girl writing in her notebook" loading="lazy"><figcaption><span>Writing and drawing</span><b class="tag">Arts</b></figcaption></figure>
-      <figure class="g-item" data-cat="events"><img src="{{ asset('frontend/assets/mission-photo.png') }}" alt="Children studying a seedling" loading="lazy"><figcaption><span>Learning outdoors</span><b class="tag">Events</b></figcaption></figure>
-      <figure class="g-item" data-cat="events"><img src="{{ asset('frontend/assets/stage-photo.png') }}" alt="Students building a robot car" loading="lazy"><figcaption><span>Robotics corner</span><b class="tag">Events</b></figcaption></figure>
-      <figure class="g-item" data-cat="announcements"><img src="{{ asset('frontend/assets/give-child.png') }}" alt="A family meeting the admissions team" loading="lazy"><figcaption><span>Admissions open for April 2027</span><b class="tag">Announcements</b></figcaption></figure>
+@foreach ($galleries as $gallery)
+      <figure class="g-item" data-cat="{{ Str::slug($gallery->category->category_name) }}" data-full="{{ $gallery->innerImageUrl() }}"><img src="{{ $gallery->listImageUrl() }}" alt="{{ $gallery->name }}" loading="lazy"><figcaption><span>{{ $gallery->name }}</span><b class="tag">{{ $gallery->category->category_name }}</b></figcaption></figure>
+@endforeach
     </div>
     <p class="tbc-note" id="g1-empty" hidden style="max-width:520px;margin:10px auto 0">No photos in this category yet. The school will add achievements as the first year unfolds.</p>
   </div>

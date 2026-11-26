@@ -9,7 +9,7 @@
     <img class="modal-tiger" src="{{ asset('frontend/assets/mascot/tiger-head.webp') }}" alt="" width="333" height="300">
     <h2 id="m-title" data-m-title>Plan Your Child’s Journey With Ananya</h2>
     <p class="m-text" data-m-text>Share a few details and our admissions team will call you within one working day to answer your questions and arrange a campus visit.</p>
-    <form class="js-form" data-thanks="Thank you. Our admissions team will reach out to you shortly." novalidate>
+    <form class="js-form" action="{{ route('inquiries.store', 'enquire') }}" method="POST" data-thanks="Thank you. Our admissions team will reach out to you shortly." novalidate>
       <input type="hidden" name="source" value="popup" data-m-source>
       <div class="f-grid">
         <label class="fl"><span>Parent’s Name*</span><input class="field" id="m-parent" name="parent" required autocomplete="name"></label>
