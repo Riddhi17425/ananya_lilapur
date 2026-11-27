@@ -15,8 +15,9 @@ class PhotoGalleryRequest extends FormRequest
 
     public function rules(): array
     {
-        // Images are required when adding, optional when editing (keep the old one).
-        $image = [$this->isMethod('post') ? 'required' : 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'];
+        // Adding needs at least one image (list = home page slider, inner = News & Gallery page).
+        // When editing both are optional: the old files are kept.
+        $image = ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'];
 
         return [
             'category_id' => [
@@ -30,8 +31,8 @@ class PhotoGalleryRequest extends FormRequest
                 ),
             ],
             'name' => ['required', 'string', 'max:255'],
-            'list_image' => $image,
-            'inner_image' => $image,
+            'list_image' => $this->isMethod('post') ? array_merge(['required_without:inner_image'], $image) : $image,
+            'inner_image' => $this->isMethod('post') ? array_merge(['required_without:list_image'], $image) : $image,
             'status' => ['required', 'boolean'],
         ];
     }
@@ -51,6 +52,8 @@ class PhotoGalleryRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'list_image.required_without' => 'Please upload a list image or an inner image.',
+            'inner_image.required_without' => 'Please upload an inner image or a list image.',
             'list_image.max' => 'The list image must not be larger than 2 MB.',
             'inner_image.max' => 'The inner image must not be larger than 2 MB.',
             'list_image.mimes' => 'The list image must be a JPG, PNG or WEBP file.',

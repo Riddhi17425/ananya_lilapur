@@ -59,7 +59,7 @@
     </div>
     <div class="gallery" id="g1" data-stagger>
 @foreach ($galleries as $gallery)
-      <figure class="g-item" data-cat="{{ Str::slug($gallery->category->category_name) }}" data-full="{{ $gallery->innerImageUrl() }}"><img src="{{ $gallery->listImageUrl() }}" alt="{{ $gallery->name }}" loading="lazy"><figcaption><span>{{ $gallery->name }}</span><b class="tag">{{ $gallery->category->category_name }}</b></figcaption></figure>
+      <figure class="g-item" data-cat="{{ Str::slug($gallery->category->category_name) }}" data-full="{{ $gallery->innerImageUrl() }}"><img src="{{ $gallery->innerImageUrl() }}" alt="{{ $gallery->name }}" loading="lazy"><figcaption><span>{{ $gallery->name }}</span><b class="tag">{{ $gallery->category->category_name }}</b></figcaption></figure>
 @endforeach
     </div>
     <p class="tbc-note" id="g1-empty" hidden style="max-width:520px;margin:10px auto 0">{{ $c->text('gallery_empty') }}</p>

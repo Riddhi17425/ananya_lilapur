@@ -20,22 +20,24 @@
     </div>
 </div>
 
+<p class="field__hint" style="margin:-4px 0 14px">Upload at least one image. A photo with a list image appears on the home page slider; a photo with an inner image appears on the News &amp; Gallery page. Upload both to show it on both pages.</p>
+
 <div class="field-row">
     <div class="field">
-        <label for="list_image" class="is-required">List image</label>
-        <input id="list_image" name="list_image" type="file" accept=".jpg,.jpeg,.png,.webp" data-rule-imagefile="true" @required(! $gallery) @class(['is-invalid' => $errors->has('list_image')])>
-        <p class="field__hint">JPG, PNG or WEBP, up to 2 MB.</p>
-        @if ($gallery)
+        <label for="list_image">List image</label>
+        <input id="list_image" name="list_image" type="file" accept=".jpg,.jpeg,.png,.webp" data-rule-imagefile="true" @if (! $gallery) data-rule-requiredwithout="#inner_image" @endif @class(['is-invalid' => $errors->has('list_image')])>
+        <p class="field__hint">Shown on the home page slider (Life at Ananya). JPG, PNG or WEBP, up to 2 MB.</p>
+        @if ($gallery?->list_image)
             <img class="preview" src="{{ $gallery->listImageUrl() }}" alt="Current list image">
         @endif
         @error('list_image') <p class="field__error field__error--server" role="alert">{{ $message }}</p> @enderror
     </div>
 
     <div class="field">
-        <label for="inner_image" class="is-required">Inner image</label>
-        <input id="inner_image" name="inner_image" type="file" accept=".jpg,.jpeg,.png,.webp" data-rule-imagefile="true" @required(! $gallery) @class(['is-invalid' => $errors->has('inner_image')])>
-        <p class="field__hint">JPG, PNG or WEBP, up to 2 MB.</p>
-        @if ($gallery)
+        <label for="inner_image">Inner image</label>
+        <input id="inner_image" name="inner_image" type="file" accept=".jpg,.jpeg,.png,.webp" data-rule-imagefile="true" @if (! $gallery) data-rule-requiredwithout="#list_image" @endif @class(['is-invalid' => $errors->has('inner_image')])>
+        <p class="field__hint">Shown on the News &amp; Gallery page (Life on Campus). JPG, PNG or WEBP, up to 2 MB.</p>
+        @if ($gallery?->inner_image)
             <img class="preview" src="{{ $gallery->innerImageUrl() }}" alt="Current inner image">
         @endif
         @error('inner_image') <p class="field__error field__error--server" role="alert">{{ $message }}</p> @enderror

@@ -112,9 +112,17 @@ class PhotoGalleryTest extends TestCase
         $category = $this->category();
         $inactive = $this->category(['category_name' => 'Hidden', 'status' => 0]);
 
-        // Images are required when adding.
+        // At least one image is required when adding (list image = home slider, inner image = gallery page).
         $this->post(route('admin.photo-galleries.store'), ['name' => '', 'category_id' => '', 'status' => 1])
             ->assertSessionHasErrors(['category_id', 'name', 'list_image', 'inner_image']);
+
+        // One image is enough.
+        $this->post(route('admin.photo-galleries.store'), $this->galleryData($category, ['name' => 'Home only', 'inner_image' => null]))
+            ->assertSessionHasNoErrors();
+        $home = PhotoGallery::firstWhere('name', 'Home only');
+        $this->assertNotNull($home->list_image);
+        $this->assertNull($home->inner_image);
+        $home->delete();
 
         // Wrong file type, too large, and an inactive category.
         $this->post(route('admin.photo-galleries.store'), $this->galleryData($inactive, [
@@ -122,7 +130,7 @@ class PhotoGalleryTest extends TestCase
             'inner_image' => UploadedFile::fake()->image('big.jpg')->size(3000),
         ]))->assertSessionHasErrors(['category_id', 'list_image', 'inner_image']);
 
-        $this->assertDatabaseCount('photo_galleries', 0);
+        $this->assertSame(0, PhotoGallery::count());
     }
 
     public function test_admin_can_update_toggle_and_delete_gallery(): void

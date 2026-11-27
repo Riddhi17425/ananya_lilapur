@@ -25,7 +25,7 @@ class PhotoGalleryController extends Controller
                 ->filterColumn('category', fn ($query, $keyword) => $query->whereHas(
                     'category', fn ($q) => $q->where('category_name', 'like', "%{$keyword}%")
                 ))
-                ->editColumn('list_image', fn (PhotoGallery $g) => '<img class="thumb" src="'.e($g->listImageUrl()).'" alt="'.e($g->name).'">')
+                ->editColumn('list_image', fn (PhotoGallery $g) => '<img class="thumb" src="'.e($g->thumbnailUrl()).'" alt="'.e($g->name).'">')
                 ->editColumn('status', fn (PhotoGallery $g) => view('admin.photo-galleries._status', ['gallery' => $g])->render())
                 ->addColumn('action', fn (PhotoGallery $g) => view('admin.photo-galleries._actions', ['gallery' => $g])->render())
                 ->rawColumns(['list_image', 'status', 'action'])
@@ -43,8 +43,12 @@ class PhotoGalleryController extends Controller
     public function store(PhotoGalleryRequest $request): RedirectResponse
     {
         $data = $request->safe()->except(['list_image', 'inner_image']);
-        $data['list_image'] = $request->file('list_image')->store('photo-galleries/list', 'public');
-        $data['inner_image'] = $request->file('inner_image')->store('photo-galleries/inner', 'public');
+        // Each image is optional (at least one is required by the request).
+        foreach (['list_image' => 'photo-galleries/list', 'inner_image' => 'photo-galleries/inner'] as $field => $folder) {
+            if ($request->hasFile($field)) {
+                $data[$field] = $request->file($field)->store($folder, 'public');
+            }
+        }
 
         PhotoGallery::create($data);
 
@@ -66,7 +70,9 @@ class PhotoGalleryController extends Controller
         // Only replace an image when a new one was uploaded; remove the old file then.
         foreach (['list_image' => 'photo-galleries/list', 'inner_image' => 'photo-galleries/inner'] as $field => $folder) {
             if ($request->hasFile($field)) {
-                Storage::disk('public')->delete($gallery->{$field});
+                if ($gallery->{$field}) {
+                    Storage::disk('public')->delete($gallery->{$field});
+                }
                 $data[$field] = $request->file($field)->store($folder, 'public');
             }
         }

@@ -2094,3 +2094,58 @@ mark.tbc {
 
 .stage-tabs .copy .copy-18 p+p{margin-top:.6em}
 .js-form .field-error{margin:6px 0 0;font-size:13px;line-height:1.4;color:#b23b37}
+
+/* ---- Academics: mobile fixes ---- */
+.tabs button,
+.tabs button:focus,
+.tabs button:active {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.tabs button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+@media (hover:none) {
+  .tabs button:hover { background: none; }
+  .tabs button[aria-selected="true"]:hover { background: var(--orange); }
+}
+
+@media (max-width:760px) {
+  /* decorations must never sit on top of headings/body copy */
+  #cbse, #stages { position: relative; overflow: hidden; }
+  #cbse .deco {
+    width: 56px !important;
+    top: 0 !important;
+    opacity: .5;
+  }
+  #cbse .copy { padding-top: 34px; }
+  #stages { padding-top: 110px; }
+  #stages .deco {
+    opacity: 1;
+    top: 18px !important;
+  }
+  #stages .deco.wiggle { left: 8% !important; width: 64px !important; }
+  #stages .deco.float { right: 8% !important; width: 80px !important; }
+  #stages .g-head { position: relative; z-index: 2; }
+}
+
+/* ---- Home hero (mobile): tiger + greeting stay in the bottom-left corner, clear of the student's face ---- */
+@media (max-width:760px) {
+  .hero { padding-bottom: 0; }
+  .hero-art { width: min(560px, 100%); }
+  .tiger-hero {
+    left: max(6px, env(safe-area-inset-left, 0px));
+    bottom: 10px;
+    width: clamp(84px, 24vw, 104px);
+  }
+  .tiger-hero .bubble {
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 7px 11px;
+    --tail-x: 22%;
+  }
+}

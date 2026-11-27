@@ -14,8 +14,9 @@ class PageController extends Controller
     {
         return view('front.pages.index', [
             'testimonials' => Testimonial::active()->oldest('id')->get(),
-            // "Life at Ananya" strip: the 12 newest active photos from the photo gallery.
+            // "Life at Ananya" strip: the 12 newest active photos that have a list image.
             'homeGalleries' => PhotoGallery::active()
+                ->forHome()
                 ->whereIn('category_id', PhotoGalleryCategory::active()->select('id'))
                 ->latest('id')
                 ->limit(12)
@@ -64,10 +65,14 @@ class PageController extends Controller
 
     public function newsGallery()
     {
-        // "Life on Campus": all active categories (filters) and their active photos.
-        $categories = PhotoGalleryCategory::active()->orderBy('id')->get();
+        // "Life on Campus": every active category (filters) except "Life at Ananya" and the active photos that have an inner image.
+        $categories = PhotoGalleryCategory::active()
+            ->where('category_name', '!=', PhotoGalleryCategory::LIFE_AT_ANANYA)
+            ->orderBy('id')
+            ->get();
 
         $galleries = PhotoGallery::active()
+            ->forGalleryPage()
             ->with('category')
             ->whereIn('category_id', $categories->modelKeys())
             ->oldest('id')

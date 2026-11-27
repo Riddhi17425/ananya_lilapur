@@ -7,7 +7,7 @@
     var b=hero.querySelector('.bubble'),i=0,msgs=[
       'Hi! Welcome to <b>Ananya</b>',
       'Every child is <b>born curious</b>!',
-      'Admissions open for <b>April 2027</b>',
+      'Hi! Welcome to <b>Ananya</b>',
       'Let’s go on a <b>QUEST</b>!',
       'Growing beyond <b>what we are</b>'];
     hero.addEventListener('click',function(){

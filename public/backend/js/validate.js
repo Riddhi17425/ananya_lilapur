@@ -24,6 +24,11 @@ $(function () {
     return 'The ' + fieldName(element) + ' must contain an upper case letter, a lower case letter and a number.';
   });
 
+  // One of two files is needed (photo gallery: list image or inner image).
+  $.validator.addMethod('requiredwithout', function (value, element, other) {
+    return value !== '' || $(other).val() !== '';
+  }, 'Please upload a list image or an inner image.');
+
   // Image upload: JPG, PNG or WEBP, up to 2 MB (same as the server rule).
   $.validator.addMethod('imagefile', function (value, element) {
     if (this.optional(element) || !element.files || !element.files.length) { return true; }

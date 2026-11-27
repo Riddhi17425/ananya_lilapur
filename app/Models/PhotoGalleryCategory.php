@@ -13,7 +13,11 @@ class PhotoGalleryCategory extends Model
 {
     use SoftDeletes;
 
+    /** Photos of this category are the home page "Life at Ananya" slider (and are not listed on News & Gallery). */
+    public const LIFE_AT_ANANYA = 'Life at Ananya';
+
     protected $table = 'photo_gallery_category';
+
     protected function casts(): array
     {
         return ['status' => 'boolean'];

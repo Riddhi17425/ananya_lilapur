@@ -29,13 +29,31 @@ class PhotoGallery extends Model
         return $query->where('status', 1);
     }
 
-    public function listImageUrl(): string
+    /** Photos that have a list image (home page "Life at Ananya" slider). */
+    public function scopeForHome(Builder $query): Builder
     {
-        return asset('storage/'.$this->list_image);
+        return $query->whereNotNull('list_image');
     }
 
-    public function innerImageUrl(): string
+    /** Photos that have an inner image (News & Gallery page, "Life on Campus"). */
+    public function scopeForGalleryPage(Builder $query): Builder
     {
-        return asset('storage/'.$this->inner_image);
+        return $query->whereNotNull('inner_image');
+    }
+
+    public function listImageUrl(): ?string
+    {
+        return $this->list_image ? asset('storage/'.$this->list_image) : null;
+    }
+
+    public function innerImageUrl(): ?string
+    {
+        return $this->inner_image ? asset('storage/'.$this->inner_image) : null;
+    }
+
+    /** Any image of the photo, for the admin list thumbnail. */
+    public function thumbnailUrl(): ?string
+    {
+        return $this->listImageUrl() ?? $this->innerImageUrl();
     }
 }
