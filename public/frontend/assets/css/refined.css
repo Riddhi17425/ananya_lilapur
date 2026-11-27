@@ -445,7 +445,8 @@ main > .ph {
 .space .ph img {
   width: 100%;
   height: clamp(170px, 16vw, 220px);
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 30px;
 }
 
 .space.wide .ph img {

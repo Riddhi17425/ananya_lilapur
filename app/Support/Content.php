@@ -38,7 +38,7 @@ class Content
     ];
 
     /** Field types: text, textarea, title, html, image. */
-    public const TYPES = ['text', 'textarea', 'title', 'html', 'image'];
+    public const TYPES = ['text', 'textarea', 'title', 'html', 'image', 'file'];
 
     private array $fields = [];
 
@@ -122,7 +122,7 @@ class Content
         $definition = $this->definition($key);
         $value = $this->saved[$key] ?? null;
 
-        if ($value === null || ($definition['type'] === 'image' && $value === '')) {
+        if ($value === null || (in_array($definition['type'], ['image', 'file'], true) && $value === '')) {
             return (string) ($definition['default'] ?? '');
         }
 
@@ -131,7 +131,13 @@ class Content
 
     public function isUploaded(string $key): bool
     {
-        return ($this->saved[$key] ?? '') !== '' && $this->definition($key)['type'] === 'image';
+        return ($this->saved[$key] ?? '') !== '' && in_array($this->definition($key)['type'], ['image', 'file'], true);
+    }
+
+    /** URL of an uploaded file (video). Empty when nothing was uploaded. */
+    public function fileUrl(string $key): string
+    {
+        return $this->isUploaded($key) ? asset('storage/'.$this->saved[$key]) : '';
     }
 
     private function definition(string $key): array

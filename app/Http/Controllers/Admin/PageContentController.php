@@ -38,7 +38,7 @@ class PageContentController extends Controller
         $saved = PageContent::where('page', $page)->pluck('value', 'field_key');
 
         foreach ($request->fields() as $key => $field) {
-            if ($field['type'] === 'image') {
+            if (in_array($field['type'], ['image', 'file'], true)) {
                 $this->saveImage($request, $page, $key, $saved[$key] ?? null);
 
                 continue;
@@ -93,7 +93,7 @@ class PageContentController extends Controller
     /** Remove an uploaded image file (the original images in public/ are never deleted). */
     private function deleteImage(string $page, string $key, ?string $value): void
     {
-        $isImage = collect(Content::sections($page))->contains(fn ($fields) => ($fields[$key]['type'] ?? null) === 'image');
+        $isImage = collect(Content::sections($page))->contains(fn ($fields) => in_array($fields[$key]['type'] ?? null, ['image', 'file'], true));
 
         if ($isImage && $value) {
             Storage::disk('public')->delete($value);

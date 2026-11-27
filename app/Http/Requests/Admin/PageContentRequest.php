@@ -47,6 +47,7 @@ class PageContentRequest extends FormRequest
         foreach ($this->fields() as $key => $field) {
             $rules += match ($field['type']) {
                 'image' => ["image.$key" => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048']],
+                'file' => ["image.$key" => ['nullable', 'file', 'mimetypes:video/mp4,video/webm,video/quicktime', 'max:256000']],
                 'html' => ["content.$key" => ['nullable', 'string', 'max:20000']],
                 'textarea' => ["content.$key" => ['nullable', 'string', 'max:5000']],
                 'title' => ["content.$key" => ['nullable', 'string', 'max:500']],
@@ -63,7 +64,7 @@ class PageContentRequest extends FormRequest
         $names = [];
 
         foreach ($this->fields() as $key => $field) {
-            $names[($field['type'] === 'image' ? 'image.' : 'content.').$key] = $field['label'];
+            $names[(in_array($field['type'], ['image', 'file'], true) ? 'image.' : 'content.').$key] = $field['label'];
         }
 
         return $names;
@@ -75,6 +76,7 @@ class PageContentRequest extends FormRequest
             'image.*.max' => 'The :attribute must not be larger than 2 MB.',
             'image.*.mimes' => 'The :attribute must be a JPG, PNG or WEBP file.',
             'image.*.image' => 'The :attribute must be an image.',
+            'image.*.mimetypes' => 'The :attribute must be an MP4, WebM or MOV video.',
         ];
     }
 }

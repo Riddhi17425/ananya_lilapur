@@ -163,12 +163,12 @@
       <p>{{ $c->text('visit_text') }}</p>
       <form class="js-form" action="{{ route('inquiries.store', 'visit') }}" method="POST" data-thanks="Thank you. We will confirm your campus visit shortly." novalidate>
         <div class="f-grid">
-          <label class="fl"><span>Parent’s Name*</span><input class="field" id="v-parent" name="parent" required autocomplete="name"></label>
+          <label class="fl"><span>Parent's Name*</span><input class="field" id="v-parent" name="parent" required autocomplete="name"></label>
           <label class="fl"><span>Mobile Number*</span><input class="field" id="v-mobile" name="mobile" type="tel" required autocomplete="tel" pattern="[0-9+\-\s]{10,15}"></label>
           <label class="fl full"><span>Email*</span><input class="field" id="v-email" name="email" type="email" required autocomplete="email"></label>
           <label class="fl"><span>Preferred Date and Time*</span><input class="field" id="v-date" name="datetime" type="datetime-local" required></label>
           <label class="fl"><span>Number of Visitors*</span><input class="field" id="v-count" name="visitors" type="number" min="1" max="8" value="2" required></label>
-          <label class="fl full"><span>Child’s Class*</span><select class="field" id="v-class" name="class" required><option value="" disabled selected hidden>Select a class</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option></select></label>
+          <label class="fl full"><span>Child's Class*</span><select class="field" id="v-class" name="class" required><option value="" disabled selected hidden>Select a class</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option></select></label>
         </div>
         <button class="btn btn-primary" type="submit">{{ $c->text('visit_button') }} <svg class="arrow"><use href="#i-arrow"/></svg></button>
         <p class="form-note" role="status" aria-live="polite"></p>

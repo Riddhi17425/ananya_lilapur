@@ -11,6 +11,8 @@
 <style>
 /* Campus hero: wide photo sits near the top of the hero, with the same offset used on the other hero pages */
 .ph-campus .ph-art{top:40px;width:600px}
+/* Jump menu scrolls with the page (not sticky) on this page only */
+.jump{position:static}
 /* Campus Tour frame: rounded video box */
 .tour-frame{max-width:1000px;margin:40px auto 0;border-radius:22px;overflow:hidden;box-shadow:0 20px 50px rgba(20,33,61,.18)}
 .tour-frame video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#14213d}

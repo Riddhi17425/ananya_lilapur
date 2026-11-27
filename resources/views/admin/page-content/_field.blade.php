@@ -1,8 +1,9 @@
 {{-- One field of the page form. Variables: $key, $field (definition), $content (App\Support\Content) --}}
 @php
     $type = $field['type'];
-    $name = ($type === 'image' ? 'image' : 'content').'['.$key.']';
-    $errorKey = ($type === 'image' ? 'image.' : 'content.').$key;
+    $isUpload = in_array($type, ['image', 'file'], true);
+    $name = ($isUpload ? 'image' : 'content').'['.$key.']';
+    $errorKey = ($isUpload ? 'image.' : 'content.').$key;
     $id = 'f-'.$key;
 @endphp
 
@@ -16,6 +17,13 @@
         @if ($content->isUploaded($key))
             <label class="check pc-reset-image"><input type="checkbox" name="reset_image[{{ $key }}]" value="1"> Use the original image again</label>
         @endif
+    @elseif ($type === 'file')
+        <input id="{{ $id }}" name="{{ $name }}" type="file" accept=".mp4,.webm,.mov,video/mp4,video/webm,video/quicktime" @class(['is-invalid' => $errors->has($errorKey)])>
+        <p class="field__hint">{{ $field['hint'] ?? 'MP4, WebM or MOV video. Choose a file only when you want to replace it.' }}</p>
+        @if ($content->isUploaded($key))
+            <video class="preview" src="{{ $content->fileUrl($key) }}" controls preload="metadata" style="max-width:100%"></video>
+            <label class="check pc-reset-image"><input type="checkbox" name="reset_image[{{ $key }}]" value="1"> Remove the uploaded video</label>
+        @endif
     @elseif ($type === 'text')
         <input id="{{ $id }}" name="{{ $name }}" type="text" value="{{ old('content.'.$key, $content->raw($key)) }}" maxlength="1000" @class(['is-invalid' => $errors->has($errorKey)])>
     @elseif ($type === 'html')
@@ -28,7 +36,7 @@
         @endif
     @endif
 
-    @if ($type !== 'image' && $type !== 'title' && ! empty($field['hint']))
+    @if (! in_array($type, ['image', 'file', 'title'], true) && ! empty($field['hint']))
         <p class="field__hint">{{ $field['hint'] }}</p>
     @endif
 
