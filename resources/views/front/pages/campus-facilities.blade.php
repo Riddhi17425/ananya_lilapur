@@ -11,6 +11,9 @@
 <style>
 /* Campus hero: wide photo sits near the top of the hero, with the same offset used on the other hero pages */
 .ph-campus .ph-art{top:40px;width:600px}
+/* Campus Tour frame: rounded video box */
+.tour-frame{max-width:1000px;margin:40px auto 0;border-radius:22px;overflow:hidden;box-shadow:0 20px 50px rgba(20,33,61,.18)}
+.tour-frame video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#14213d}
 </style>
 @endpush
 
@@ -30,7 +33,7 @@
   </div>
 </section>
 
-<nav class="jump" aria-label="On this page"><div class="stage"><a href="#classrooms">{{ $c->text('jump_1') }}</a><a href="#library-labs">{{ $c->text('jump_2') }}</a><a href="#sports-facilities">{{ $c->text('jump_3') }}</a><a href="#safety">{{ $c->text('jump_4') }}</a><a href="#health">{{ $c->text('jump_5') }}</a></div></nav>
+<nav class="jump" aria-label="On this page"><div class="stage"><a href="#classrooms">{{ $c->text('jump_1') }}</a><a href="#campus-tour">{{ $c->text('jump_2') }}</a><a href="#sports-facilities">{{ $c->text('jump_3') }}</a><a href="#safety">{{ $c->text('jump_4') }}</a><a href="#health">{{ $c->text('jump_5') }}</a></div></nav>
 <section class="sec" id="classrooms" aria-labelledby="cls-title">
   <div class="stage msplit">
     <div class="copy rv" data-rv="left">
@@ -42,20 +45,18 @@
     <div class="media rv" data-rv="right"><img class="soft-img" src="{{ $c->image('classrooms_image') }}" alt="{{ $c->text('classrooms_image_alt') }}" width="1249" height="751" loading="lazy"></div>
   </div>
 </section>
-<section class="sec bg-peach" id="library-labs" aria-labelledby="ll-title">
+<section class="sec bg-peach" id="campus-tour" aria-labelledby="ct-title">
   <div class="stage">
     <div class="sec-head rv">
-      <div class="tiger-pal" data-side="left" aria-hidden="true"><img src="{{ $c->image('labs_mascot_image') }}" alt="" width="421" height="760" loading="lazy"><p class="bubble">{{ $c->text('labs_bubble_before') }}<b>{{ $c->text('labs_bubble_bold') }}</b>{{ $c->text('labs_bubble_after') }}</p></div>
-      <span class="kicker">{{ $c->text('labs_kicker') }}</span>
-      <h2 class="h2" id="ll-title">{{ $c->title('labs_title') }}</h2>
+      <span class="kicker">{{ $c->text('tour_kicker') }}</span>
+      <h2 class="h2" id="ct-title">{{ $c->title('tour_title') }}</h2>
+      <p class="copy-18">{{ $c->text('tour_text') }}</p>
     </div>
-    <div class="space-grid" data-stagger>
-      <article class="space s-sports"><div class="ph"><img src="{{ $c->image('space_1_image') }}" alt="{{ $c->text('space_1_image_alt') }}" width="464" height="286" loading="lazy"></div><h3>{{ $c->text('space_1_title') }}</h3><p>{{ $c->text('space_1_text') }}</p></article>
-      <article class="space s-chem"><div class="ph"><img src="{{ $c->image('space_2_image') }}" alt="{{ $c->text('space_2_image_alt') }}" width="464" height="286" loading="lazy"></div><h3>{{ $c->text('space_2_title') }}</h3><p>{{ $c->text('space_2_text') }}</p></article>
-      <article class="space s-lib"><div class="ph"><img src="{{ $c->image('space_3_image') }}" alt="{{ $c->text('space_3_image_alt') }}" width="464" height="286" loading="lazy"></div><h3>{{ $c->text('space_3_title') }}</h3><p>{{ $c->text('space_3_text') }}</p></article>
-      <article class="space wide s-art"><div class="ph"><img src="{{ $c->image('space_4_image') }}" alt="{{ $c->text('space_4_image_alt') }}" width="464" height="286" loading="lazy"></div><h3>{{ $c->text('space_4_title') }}</h3><p>{{ $c->text('space_4_text') }}</p></article>
-      <article class="space wide s-comp"><div class="ph"><img src="{{ $c->image('space_5_image') }}" alt="{{ $c->text('space_5_image_alt') }}" width="464" height="286" loading="lazy"></div><h3>{{ $c->text('space_5_title') }}</h3><p>{{ $c->text('space_5_text') }}</p></article>
+    @if ($c->isUploaded('tour_video'))
+    <div class="tour-frame rv">
+      <video src="{{ $c->fileUrl('tour_video') }}" autoplay muted loop playsinline controls preload="auto" aria-label="{{ $c->text('tour_kicker') }}"></video>
     </div>
+    @endif
   </div>
 </section>
 <section class="sec" id="sports-facilities" aria-labelledby="sf-title">

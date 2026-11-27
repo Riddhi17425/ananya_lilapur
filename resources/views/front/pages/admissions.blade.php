@@ -24,7 +24,7 @@
   </div>
 </section>
 
-<nav class="jump" aria-label="On this page"><div class="stage"><a href="#process">{{ $c->text('jump_process') }}</a><a href="#eligibility">{{ $c->text('jump_eligibility') }}</a><a href="#fees">{{ $c->text('jump_fees') }}</a><a href="#faq">{{ $c->text('jump_faq') }}</a><a href="#enquire">{{ $c->text('jump_enquire') }}</a><a href="#visit">{{ $c->text('jump_visit') }}</a></div></nav>
+<nav class="jump" aria-label="On this page"><div class="stage"><a href="#process">{{ $c->text('jump_process') }}</a><a href="#eligibility">{{ $c->text('jump_eligibility') }}</a>{{-- Fees tab commented out for now: <a href="#fees">{{ $c->text('jump_fees') }}</a> --}}<a href="#faq">{{ $c->text('jump_faq') }}</a><a href="#enquire">{{ $c->text('jump_enquire') }}</a><a href="#visit">{{ $c->text('jump_visit') }}</a></div></nav>
 
 <section class="sec bg-peach" id="process" aria-labelledby="proc-title">
   <div class="stage">
@@ -100,6 +100,7 @@
   </div>
 </section>
 
+{{-- Fees section commented out for now
 <section class="sec bg-sky" id="fees" aria-labelledby="fee-title" hidden>
   <div class="stage">
     <div class="fee-card rv" data-rv="zoom">
@@ -120,6 +121,7 @@
     </div>
   </div>
 </section>
+--}}
 
 @if ($faqs->isNotEmpty())
 <section class="sec faq" id="faq" aria-labelledby="faq-title">

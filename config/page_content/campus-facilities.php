@@ -18,7 +18,7 @@ return [
     ],
     'Page menu' => [
         'jump_1' => ['label' => 'Menu link 1', 'type' => 'text', 'default' => 'Classrooms'],
-        'jump_2' => ['label' => 'Menu link 2', 'type' => 'text', 'default' => 'Library & Labs'],
+        'jump_2' => ['label' => 'Menu link 2 (Campus Tour)', 'type' => 'text', 'default' => 'Campus Tour'],
         'jump_3' => ['label' => 'Menu link 3', 'type' => 'text', 'default' => 'Sports'],
         'jump_4' => ['label' => 'Menu link 4', 'type' => 'text', 'default' => 'Transport'],
         'jump_5' => ['label' => 'Menu link 5', 'type' => 'text', 'default' => 'Health'],
@@ -35,7 +35,7 @@ return [
         'classrooms_image' => ['label' => 'Image', 'type' => 'image', 'default' => 'frontend/assets/campus/classroom-model.webp'],
         'classrooms_image_alt' => ['label' => 'Image description (alt text)', 'type' => 'text', 'default' => 'Students presenting a paper model village in a bright classroom while a teacher listens'],
     ],
-    'Library & Laboratories' => [
+    /* 'Library & Laboratories' => [
         'labs_kicker' => ['label' => 'Small heading', 'type' => 'text', 'default' => 'Library & Laboratories'],
         'labs_title' => ['label' => 'Heading', 'type' => 'title', 'default' => 'Read, Explore, *Experiment*'],
         'labs_bubble_before' => ['label' => 'Speech bubble: text before bold word', 'type' => 'text', 'default' => 'Come and '],
@@ -61,6 +61,12 @@ return [
         'space_5_image_alt' => ['label' => 'Card 5 image description (alt text)', 'type' => 'text', 'default' => 'Students learning with computers in the computer lab'],
         'space_5_title' => ['label' => 'Card 5 title', 'type' => 'text', 'default' => 'Computer Lab'],
         'space_5_text' => ['label' => 'Card 5 text', 'type' => 'textarea', 'default' => 'Coding, digital skills and safe internet use, with smart classrooms across the school.'],
+    ], */
+    'Campus Tour' => [
+        'tour_kicker' => ['label' => 'Small heading', 'type' => 'text', 'default' => 'Campus Tour'],
+        'tour_title' => ['label' => 'Heading', 'type' => 'title', 'default' => 'Explore Our Campus, *Experience a World of Possibilities*'],
+        'tour_text' => ['label' => 'Message', 'type' => 'textarea', 'default' => 'Take a closer look at our vibrant campus, thoughtfully designed learning spaces and inspiring environments where young minds learn, grow and thrive.'],
+        'tour_video' => ['label' => 'Video upload', 'type' => 'file', 'default' => '', 'hint' => 'MP4, WebM or MOV, up to 250 MB. Shown in place of the image below once uploaded.'],
     ],
     'Decorative images' => [
         'labs_mascot_image' => ['label' => 'Tiger mascot image (Library & Laboratories)', 'type' => 'image', 'default' => 'frontend/assets/mascot/tiger-proud.webp'],
